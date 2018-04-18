@@ -1,0 +1,93 @@
+autor:
+    - codigo
+    - nome
+    - e-mail
+
+artigo:
+    - 1 ou mais autores
+    - titulo
+    - nº de exemplares em stock
+    - nº de exemplares vendidos
+
+
+create table t1_autor
+(
+    code int primary key,
+    nome varchar(30),
+    email varchar(30)
+);
+
+create table t1_artigo
+(
+    code int primary key,
+    titulo varchar(30),
+    stock int,
+    vendidos int
+);
+
+create table t1_artigo_autor
+(
+    code_artigo int,
+    code_autor int,
+    primary key(code_autor, code_artigo),
+    foreign key(code_autor) references t1_autor(code),
+    foreign key(code_artigo) references t1_artigo(code)
+);
+
+create table t1_compras
+(
+    codigo SERIAL,
+    c_artigo int,
+    quantidade int primary key,
+    foreign key(c_artigo) references t1_artigo(code)
+);
+
+GRANT ALL on t1_artigo TO l35476;
+GRANT ALL on t1_artigo_autor TO l35476;
+GRANT ALL on t1_autor TO l35476;
+
+DROP TABLE IF EXISTS t1_artigo_autor;
+DROP TABLE IF EXISTS t1_compra;
+DROP TABLE IF EXISTS t1_artigo;
+DROP TABLE IF EXISTS t1_autor;
+
+INSERT INTO t1_autor VALUES(1,'nome','n@n');
+INSERT INTO t1_artigo VALUES(1,'titulo',2,1);
+INSERT INTO t1_artigo_autor VALUES(1,1);
+INSERT INTO t1_compra VALUES(1);
+
+
+(select code from
+    (select max(vendidos) as maximo from t1_artigo) as tab1, t1_artigo
+where tab1.maximo = vendidos) as tab2
+
+SELECT t1_autor.code as code, t1_autor.nome as nome, t1_autor.mail as mail
+FROM t1_autor
+INNER JOIN t1_artigo_autor ON t1_artigo_autor.code_autor=t1_autor.code;
+
+select t1_artigo_autor.code_autor as code, sum(vendidos) as vendidos from
+t1_artigo, t1_artigo_autor
+where t1_artigo_autor.code_artigo = t1_artigo.code
+group by t1_artigo_autor.code_autor;
+
+
+select max(vendidos) FROM
+        (select t1_artigo_autor.code_autor as code, sum(vendidos) as vendidos from
+        t1_artigo, t1_artigo_autor
+        where t1_artigo_autor.code_artigo = t1_artigo.code
+        group by t1_artigo_autor.code_autor) as tab1
+;
+
+
+select t1_autor.code, t1_autor.nome, t1_autor.email FROM
+        (select max(vendidos) as maxi FROM
+                (select t1_artigo_autor.code_autor as code, sum(vendidos) as vendidos from
+                t1_artigo, t1_artigo_autor
+                where t1_artigo_autor.code_artigo = t1_artigo.code
+                group by t1_artigo_autor.code_autor) as tab) as max,
+        (select t1_artigo_autor.code_autor as code, sum(vendidos) as vendidos from
+        t1_artigo, t1_artigo_autor
+        where t1_artigo_autor.code_artigo = t1_artigo.code
+        group by t1_artigo_autor.code_autor) as tab1
+    INNER JOIN t1_autor on tab1.code=t1_autor.code
+where tab1.vendidos = max.maxi ;
