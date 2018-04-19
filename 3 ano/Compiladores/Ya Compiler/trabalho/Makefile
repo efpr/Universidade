@@ -7,8 +7,8 @@ LIBS =-lm
 all: clean compile run-1 run-2 run-6
 	@echo '---------------------END---------------------'
 
-compile: parser.c lexer.c ya.c
-	$(CC) $(CFLAGS) $< -o $(OUTFILE) $(LIBS)
+compile: parser.c lexer.c
+	$(CC) $(CFLAGS) $^ ya.c -o $(OUTFILE) $(LIBS)
 
 run-1:
 	./$(OUTFILE) < yaxamples/example1.ya
@@ -20,10 +20,10 @@ run-6:
 	./$(OUTFILE) < yaxamples/example6.ya
 
 parser.c: ya.y
-		bison -y -v -d $< -o $@
+		bison -y -v -d $^ -o $@
 
 lexer.c: ya.lex
-		flex -o $@ $<
+		flex -o $@ $^
 
 clean:
 		@echo '--------------------BEGIN--------------------'
