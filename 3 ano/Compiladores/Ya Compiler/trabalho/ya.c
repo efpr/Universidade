@@ -167,5 +167,59 @@ struct t_stmt_
             char* id;
             t_exp t_arg0;
         }stmt2;
-    }
-}
+        struct
+        {
+            t_exp t_arg0;
+            t_stmts t_arg1;
+            t_stmts t_arg2;
+        }stmt3;
+    }u;
+};
+
+struct t_exp_
+{
+    enum
+    {
+        EXP_ID;
+        EXP_LITERAIS;
+        EXP_ADD;
+        EXP_SUB;
+        EXP_MULT;
+        EXP_DIV;
+        EXP_MOD;
+        EXP_POT;
+        EXP_EQUAL;
+        EXP_DIFFETENT;
+        EXP_LESS;
+        EXP_BIGGER;
+        EXP_LESS_OR_EQUAL;
+        EXP_BIGGER_OR_EQUAL;
+        EXP_AND;
+        EXP_OR;
+        EXP_NOT;
+        EXP_SUB;
+        EXP_PARENTESES;
+        EXP_FUNCTION;
+    }kind;
+    union
+    {
+        struct
+        {
+            char* id;
+        }exp_1;
+        struct
+        {
+            t_literais t_arg0;
+        }exp_2;
+        struct
+        {
+            t_exp t_arg0;
+            t_exp t_arg1;
+        }exp_3;
+        struct
+        {
+            char* id;
+            t_exp t_arg0;
+        }exp4;
+    }u;
+};
