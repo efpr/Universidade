@@ -11,12 +11,12 @@ typedef struct t_argdefs_   *t_argdefs;
 typedef struct t_argdef_    *t_argdef;
 typedef struct t_literais_  *t_literais;
 typedef struct t_stmts_     *t_stmts;
-typedef struct t_smmt_      *t_stmt;
+typedef struct t_stmt_      *t_stmt;
 typedef struct t_exp_       *t_exp;
 
 t_decls T_decls_declaration(t_decl arg0, t_decls arg1);
 t_decl T_decl_variable(t_ids arg0, t_type arg1, t_exp arg2);
-t_decls T_decl_func_def(char* arg3, t_argdefs arg0, t_type arg1, t_stmts arg2);
+t_decl T_decl_func_def(char* arg3, t_argdefs arg0, t_type arg1, t_stmts arg2);
 
 t_ids T_ids_id(t_ids arg0, char* arg1);
 

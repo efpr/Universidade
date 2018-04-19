@@ -25,7 +25,7 @@ void yyerror (char const *);
 	t_argdef    argdef;
 	t_literais  literais;
 	t_stmts     stmts;
-	t_smmt      stmt;
+	t_stmt      stmt;
 	t_exp       exp;
 }
 %token <id> ID
@@ -88,7 +88,7 @@ type:		INT {$$ = T_type_def(NULL,0,NULL);}
 		|	STRING {$$ = T_type_def(NULL,2,NULL);}
 		|	BOOL {$$ = T_type_def(NULL,3,NULL);}
 		|	VOID {$$ = T_type_def(NULL,4,NULL);}
-		| 	type RRPAR LINT LRPAR {$$ = T_type_def($1,NULL,$3);}
+		| 	type RRPAR LINT LRPAR {$$ = T_type_def($1,-1,$3);}
 			;
 
 argdefs:	argdef {$$ = T_argdefs_def($1, NULL);}
