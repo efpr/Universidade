@@ -51,7 +51,7 @@ escreve(e(_,Tab)):-
 t_print([]).
 t_print([linha(X,N)| Tab]):-
     nl,write('(linha '), write(X), write(') '),
-    n_print(N), 
+    n_print(N),
     t_print(Tab).
 
 n_print(0).
