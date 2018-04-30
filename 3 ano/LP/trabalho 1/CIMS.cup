@@ -44,7 +44,7 @@ programa ::= programa etiqueta instrucao
          |
 	 ;
 etiqueta ::= IDENTIFICADOR:e DOIS_PONTOS
-				{: maquina.add_Label(new Label(e.toString(), maquina.getMemoria().size())); :}
+				{: maquina.add_Label(new Label(e.toString(), maquina.getMemoriaSize())); :}
 	 |
 	 ;
 instrucao ::= CHAMA INTEIRO:d IDENTIFICADOR:p

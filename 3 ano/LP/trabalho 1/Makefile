@@ -17,7 +17,8 @@ JLEXFLAGS =
 CLASSES = parser.class Yylex.class \
 	  Main.class CIMS.class\
 	  I_Acesso_Argumentos.java I_Acesso_Variaveis.java I_Aritmetica.java I_Chamada_Funcoes.java\
-	  I_Manipulacao_Inteiros.java I_Saida.java Label.java
+	  I_Manipulacao_Inteiros.java I_Saida.java Label.java\
+	  Memoria.java Instrucao.java
 
 INTERMEDIATE_FILES = CIMS.lex.java sym.java parser.java Yylex.java
 

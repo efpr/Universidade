@@ -3,38 +3,35 @@
 import java.util.ArrayList;
 
 public class CIMS {
-  	private ArrayList<Object> memoria;
+  	private Memoria memoria;
     private ArrayList<Object> avaliacao;
     private ArrayList<Object> execucao;
 
     public CIMS()
     {
-        memoria = new ArrayList<Object>();
+        memoria = new Memoria();
         avaliacao = new ArrayList<Object>();
         execucao = new ArrayList<Object>();
     }
 
-  	public void add_Inst(Object obj)
+  	public void add_Inst(Instrucao obj)
     {
-        memoria.add(obj);
+        memoria.mem_add_instrucao(obj);
     }
 
     public void add_Label(Label label)
     {
-    	memoria.add(label);
+    	memoria.mem_add_label(label);
     }
 
-  	public ArrayList<Object> getMemoria()
+  	public int getMemoriaSize()
   	{
-  		return memoria;
+  		return memoria.mem_instrucao_size();
   	}
 
   	public void print()
   	{
-  		for(Object temp : memoria)
-  		{
-  			System.out.println(temp.toString());
-  		}
+  		memoria.print();
   	}
 
   	/** Executa o programa CIMS carregado na maquina. */

@@ -41,7 +41,6 @@ public class I_Acesso_Variaveis extends Instrucao
         this.inteiro2 = inteiro2;
     }
 
-    @Override
     public String toString() {
         return "I_Acesso_Variaveis{" + "nome=" + nome + ", inteiro1=" + inteiro1 + ", inteiro2=" + inteiro2 + '}';
     }

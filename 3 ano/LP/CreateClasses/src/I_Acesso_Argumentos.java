@@ -1,10 +1,10 @@
 
-public class I_Acesso_Variaveis extends Instrucao
+public class I_Acesso_Argumentos extends Instrucao
 {
     private String nome;
     private int inteiro1, inteiro2;
 
-    public I_Acesso_Variaveis(String nome, int inteiro1, int inteiro2)
+    public I_Acesso_Argumentos(String nome, int inteiro1, int inteiro2)
     {
         this.nome = nome;
         this.inteiro1 = inteiro1;
@@ -41,10 +41,7 @@ public class I_Acesso_Variaveis extends Instrucao
         this.inteiro2 = inteiro2;
     }
 
-    @Override
     public String toString() {
-        return "I_Acesso_Variaveis{" + "nome=" + nome + ", inteiro1=" + inteiro1 + ", inteiro2=" + inteiro2 + '}';
+        return "I_Acesso_Argumentos{" + "nome=" + nome + ", inteiro1=" + inteiro1 + ", inteiro2=" + inteiro2 + '}';
     }
-
-
 }
