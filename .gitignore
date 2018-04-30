@@ -3,3 +3,6 @@ Redes/
 
 # Imagens
 *.png
+/3 ano/LP/CreateClasses/nbproject/private/
+/3 ano/LP/CreateClasses/dist/
+/3 ano/LP/CreateClasses/build/
