@@ -65,7 +65,7 @@ del_lista([H|R], H, L):-
 del_lista([H|R], J, [H|L]):-
     del_lista(R, J, L).
 
-check_mem(,[],,_).
+check_mem(_,[],_,_).
 check_mem(coluna, [H|R], X, Tab):-
   \+ member(num(pos(_,X), _, H), Tab),
   check_mem(coluna, R, X, Tab).
@@ -100,7 +100,7 @@ check_diagn(J, Tab):-
     check_mem(diagonais, Lista, d2, Tab)
     ).
 
-mudar_peca(,[], _,, []).
+mudar_peca(_,[], _,_, []).
 mudar_peca(J, [num(pos(Linha,Coluna), D , V)|Tab], Linha, Coluna, [num(pos(Linha,Coluna), D , J)|Tab1]):-
     V = n,
     mudar_peca(J, Tab, Linha, Coluna, Tab1).
@@ -115,7 +115,12 @@ escreve(e(_,Tab)):-
 
 t_print([], _).
 t_print([num(_, _, V)|Tab], C):-
+    V \= n,
     write(V),
+    f_print(C, C1, Tab),
+    t_print(Tab, C1).
+t_print([num(_, _, _)|Tab], C):-
+    write(' '),
     f_print(C, C1, Tab),
     t_print(Tab, C1).
 f_print(C, C2, _):-
@@ -127,6 +132,7 @@ f_print(_, _, []).
 f_print(_, C1, _):-
     nl,writeln('--+---+--'),
     C1 is 1.
+
 escreve_vencedor(e(jog(X), ,)):-
     outro(X,Y),
 nl,nl,write("Vencedor Jogador: "), write(Y), nl.
