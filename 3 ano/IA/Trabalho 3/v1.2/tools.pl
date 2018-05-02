@@ -79,7 +79,7 @@ valor_min_mm(Estado, Valor) :-
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%   Minimax Profundidade 3 (cf. aima)
+%   Minimax Profundidade 3
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -174,7 +174,8 @@ valor_max_ab(Estado, Alpha, Beta):-
         (
             sucessor(Estado,_,S),
             valor_min_ab(Estado, Alpha, Beta)
-        )
+        ),
+        Valores
     )
     */
 %
@@ -261,7 +262,6 @@ jogar(Jogo, A, B) :-
 jogada(E, _, _) :-
     estado_terminal(E),
     escreve(E),
-    % escreve_vencedor(E),
     nl, write('** FIM **'), nl.
 
 jogada(E, A, B) :-
