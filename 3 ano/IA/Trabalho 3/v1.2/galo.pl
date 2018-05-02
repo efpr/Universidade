@@ -75,6 +75,9 @@ check_mem(coluna, [H|R], X, Tab):-
 check_mem(linhas, [H|R], X, Tab):-
   \+ member(num(pos(X,_), _, H), Tab),
   check_mem(coluna, R, X, Tab).
+check_mem(diagonais, [H|R], X, Tab):-
+  \+ member(num(_, X, H), Tab),
+  check_mem(coluna, R, X, Tab).
 
 check_colum(J, Tab):-
     del_lista([x,o,n], J, Lista),!,
@@ -93,11 +96,11 @@ check_lines(J, Tab):-
     ).
 
 check_diagn(J, Tab):-
-    check_diagn(J, d1, Tab);
-    check_diagn(J, d2, Tab).
-check_diagn(J, X, Tab):-
-    member(num(_,X, J), Tab),
-    write('diagonals').
+    del_lista([x,o,n], J, Lista),!,
+    (
+    check_mem(diagonais, Lista, d1, Tab);
+    check_mem(diagonais, Lista, d2, Tab)
+    ).
 
 mudar_peca(_,[], _,_, []).
 mudar_peca(J, [num(pos(Linha,Coluna), D , V)|Tab], Linha, Coluna, [num(pos(Linha,Coluna), D , J)|Tab1]):-
