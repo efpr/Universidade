@@ -7,11 +7,10 @@
 % galo(jog(X), [num])
 
 estado_inicial(e(jog(x), Tab)):-
-    gerar_tab(Tab1),
-    diagonals(Tab1, Tab).
+    gerar_tab(Tab).
 
 estado_terminal(e(jog(X), Tab)):-
-    outro(X,X1), (
+    other_player(X,X1), (
     check_winner(X1, Tab) ;
     check_tab(Tab)).
 
@@ -24,7 +23,7 @@ utilidade(_, 0).
 sucessor(e(jog(X), Tab), galo(Linha, Coluna), e(jog(X1), Tab1)):-
     member(num(pos(Linha, Coluna), _, n), Tab),
     mudar_peca(X, Tab, Linha,Coluna, Tab1),
-    outro(X,X1).
+    other_player(X,X1).
 
 gerar_tab(Tab):-
     gerar_tab(1,1,Tab).
@@ -36,69 +35,33 @@ gerar_tab(X,Y,Tab):-
 gerar_tab(X,Y,[num(pos(X,Y), dn, n)|Tab]):-
     X1 is X + 1,
     gerar_tab(X1, Y, Tab).
-
-diagonals([],[]).
-diagonals([num(pos(1,1), _,V)|Tab], [num(pos(1,1), d1, V)|Tab1]):-
-    diagonals(Tab,Tab1).
-diagonals([num(pos(3,1), _,V)|Tab], [num(pos(3,1), d2, V)|Tab1]):-
-    diagonals(Tab,Tab1).
-diagonals([num(pos(1,3), _,V)|Tab], [num(pos(1,3), d2, V)|Tab1]):-
-    diagonals(Tab,Tab1).
-diagonals([num(pos(3,3), _,V)|Tab], [num(pos(3,3), d1, V)|Tab1]):-
-    diagonals(Tab,Tab1).
-diagonals([X|Tab], [X|Tab1]):-
-    diagonals(Tab,Tab1).
-
 check_tab([]).
 check_tab([num(_, _, X)|Tab]):-
     X \= n,
     check_tab(Tab).
 
 check_winner(J,Tab):-
-    check_colum(J,Tab);
-    check_lines(J,Tab);
-    check_diagn(J,Tab) .
-
-del_lista([],_, []).
-del_lista([H|R], H, L):-
-    del_lista(R, H, L).
-del_lista([H|R], J, [H|L]):-
-    del_lista(R, J, L).
-
-check_mem(_,[],_,_).
-check_mem(coluna, [H|R], X, Tab):-
-  \+ member(num(pos(_,X), _, H), Tab),
-  check_mem(coluna, R, X, Tab).
-check_mem(linhas, [H|R], X, Tab):-
-  \+ member(num(pos(X,_), _, H), Tab),
-  check_mem(linhas, R, X, Tab).
-check_mem(diagonais, [H|R], X, Tab):-
-  \+ member(num(_, X, H), Tab),
-  check_mem(diagonais, R, X, Tab).
-
-check_colum(J, Tab):-
-    del_lista([x,o,n], J, Lista),!,
+    member(num(pos(1,1),_,X1), Tab),
+    member(num(pos(2,1),_,X2), Tab),
+    member(num(pos(3,1),_,X3), Tab),
+    member(num(pos(1,2),_,X4), Tab),
+    member(num(pos(2,2),_,X5), Tab),
+    member(num(pos(3,2),_,X6), Tab),
+    member(num(pos(1,3),_,X7), Tab),
+    member(num(pos(2,3),_,X8), Tab),
+    member(num(pos(3,3),_,X9), Tab),
     (
-    check_mem(coluna, Lista, 1, Tab);
-    check_mem(coluna, Lista, 2, Tab);
-    check_mem(coluna, Lista, 3, Tab)
+    iguais(X1, X2, X3, J);
+    iguais(X4, X5, X6, J);
+    iguais(X7, X8, X9, J);
+    iguais(X1, X4, X7, J);
+    iguais(X2, X5, X8, J);
+    iguais(X3, X6, X9, J);
+    iguais(X1, X5, X9, J);
+    iguais(X3, X5, X7, J)
     ).
 
-check_lines(J, Tab):-
-    del_lista([x,o,n], J, Lista),!,
-    (
-    check_mem(linhas, Lista, 1, Tab);
-    check_mem(linhas, Lista, 2, Tab);
-    check_mem(linhas, Lista, 3, Tab)
-    ).
-
-check_diagn(J, Tab):-
-    member(num(pos(2,2), dn, J), Tab),
-    del_lista([x,o,n], J, Lista),!,
-    (
-    check_mem(diagonais, Lista, d1, Tab);
-    check_mem(diagonais, Lista, d2, Tab)
-    ).
+iguais(X, X, X, X).
 
 mudar_peca(_,[], _,_, []).
 mudar_peca(J, [num(pos(Linha,Coluna), D , V)|Tab], Linha, Coluna, [num(pos(Linha,Coluna), D , J)|Tab1]):-
@@ -107,8 +70,9 @@ mudar_peca(J, [num(pos(Linha,Coluna), D , V)|Tab], Linha, Coluna, [num(pos(Linha
 mudar_peca(J, [X|Tab], Linha, Coluna, [X|Tab1]):-
     mudar_peca(J, Tab, Linha, Coluna, Tab1).
 
-outro(x,o).
-outro(o,x).
+other_player(x,o).
+other_player(o,x).
+
 
 escreve(e(_,Tab)):-
     nl,t_print(Tab, 1),nl.

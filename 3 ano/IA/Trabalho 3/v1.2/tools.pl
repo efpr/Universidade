@@ -102,7 +102,7 @@ valor_max_pf(Estado, Valor, _) :-
     estado_terminal(Estado), !,
     utilidade(Estado, Valor).
 %
-valor_max_pf(_,_,0):- !.
+valor_max_pf(_,0,0).
 valor_max_pf(Estado, Valor, Cont) :-
     %
     %   Determinar os valores_min dos sucessores.
@@ -126,7 +126,7 @@ valor_min_pf(Estado, Valor,_) :-
     estado_terminal(Estado), !,
     utilidade(Estado, Valor).
 %
-valor_min_pf(_,_,0):- !.
+valor_min_pf(_,0,0).
 valor_min_pf(Estado, Valor, Cont) :-
     %
     %   Determinar os valores_max dos sucessores
@@ -298,6 +298,8 @@ teste(Jogo) :-
     consult(Jogo),
     estado_inicial(E),
     time(minimax(E, P_mm)),
-    time(alfabeta(E, P_ab)),
+    /*time(alfabeta(E, P_ab)),*/
+    time(profundidade(E, P_pf)),
     write('Minimax:  '), write(P_mm), nl,
-    write('Alfabeta: '), write(P_ab), nl.
+    /*write('Alfabeta: '), write(P_ab), nl,*/
+    write('Alfabeta: '), write(P_pf), nl.
