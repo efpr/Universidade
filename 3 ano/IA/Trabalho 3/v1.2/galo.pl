@@ -23,8 +23,7 @@ utilidade(e(jog(o), Tab), -1):-
 utilidade(_, 0).
 
 sucessor(e(jog(X), Tab), galo(Linha, Coluna), e(jog(X1), Tab1)):-
-    member(num(pos(Linha, Coluna), _, V), Tab),
-    V = n,
+    member(num(pos(Linha, Coluna), _, n), Tab),
     mudar_peca(X, Tab, Linha,Coluna, Tab1),
     outro(X,X1).
 
@@ -59,25 +58,39 @@ check_tab([num(_, _, X)|Tab]):-
     check_tab(Tab).
 
 check_winner(J,Tab):-
-    check_colum(J,Tab) ;
-    check_lines(J,Tab) ;
-    check_diagn(J,Tab) .
+    check_colum(J,Tab);
+    check_lines(J,Tab) /*;
+    check_diagn(J,Tab) */.
+
+del_lista([],_, []).
+del_lista([H|R], H, L):-
+    del_lista(R, H, L).
+del_lista([H|R], J, [H|L]):-
+    del_lista(R, J, L).
+
+check_mem(_,[],_,_).
+check_mem(coluna, [H|R], X, Tab):-
+  \+ member(num(pos(_,X), _, H), Tab),
+  check_mem(coluna, R, X, Tab).
+check_mem(linhas, [H|R], X, Tab):-
+  \+ member(num(pos(X,_), _, H), Tab),
+  check_mem(coluna, R, X, Tab).
 
 check_colum(J, Tab):-
-    check_colum(J, 1, Tab);
-    check_colum(J, 2, Tab);
-    check_colum(J, 3, Tab).
-check_colum(J, X, Tab):-
-    member(num(pos(_,X),_, J), Tab),
-    write('coluna').
+    del_lista([x,o,n], J, Lista),!,
+    (
+    check_mem(coluna, Lista, 1, Tab);
+    check_mem(coluna, Lista, 2, Tab);
+    check_mem(coluna, Lista, 3, Tab)
+    ).
 
 check_lines(J, Tab):-
-    check_lines(J, 1, Tab);
-    check_lines(J, 2, Tab);
-    check_lines(J, 3, Tab).
-check_lines(J, X, Tab):-
-    member(num(pos(X,_),_, J), Tab),
-    write('linha').
+    del_lista([x,o,n], J, Lista),!,
+    (
+    check_mem(linhas, Lista, 1, Tab);
+    check_mem(linhas, Lista, 2, Tab);
+    check_mem(linhas, Lista, 3, Tab)
+    ).
 
 check_diagn(J, Tab):-
     check_diagn(J, d1, Tab);
@@ -87,7 +100,7 @@ check_diagn(J, X, Tab):-
     write('diagonals').
 
 mudar_peca(_,[], _,_, []).
-mudar_peca(J, [num(pos(Linha,Coluna), _ , V)|Tab], Linha, Coluna, [num(pos(Linha,Coluna), _ , J)|Tab1]):-
+mudar_peca(J, [num(pos(Linha,Coluna), D , V)|Tab], Linha, Coluna, [num(pos(Linha,Coluna), D , J)|Tab1]):-
     V = n,
     mudar_peca(J, Tab, Linha, Coluna, Tab1).
 mudar_peca(J, [X|Tab], Linha, Coluna, [X|Tab1]):-
