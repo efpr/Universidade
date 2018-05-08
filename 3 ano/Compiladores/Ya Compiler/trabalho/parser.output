@@ -1,0 +1,2216 @@
+Terminals unused in grammar
+
+   ASP
+   DOT
+
+
+Grammar
+
+    0 $accept: program $end
+
+    1 program: decls
+
+    2 decls: decl
+    3      | decl decls
+
+    4 decl: ids DPOINT type SEMI
+    5     | ids DPOINT type ASSIGN exp SEMI
+    6     | ID LPAR RPAR DPOINT type LCBRACE stmts RCBRACE SEMI
+    7     | ID LPAR argdefs RPAR DPOINT type LCBRACE stmts RCBRACE SEMI
+    8     | DEFINE ID type SEMI
+
+    9 ids: ID
+   10    | ID COMMA ids
+
+   11 type: INT
+   12     | FLOAT
+   13     | STRING
+   14     | BOOL
+   15     | VOID
+   16     | type RRPAR LINT LRPAR
+
+   17 argdefs: argdef
+   18        | argdef COMMA argdefs
+
+   19 argdef: ID DPOINT type
+
+   20 literais: LINT
+   21         | LFLOAT
+   22         | LSTRING
+   23         | LBOOL
+
+   24 stmts: stmt
+   25      | stmt stmts
+
+   26 stmt: decl
+   27     | ID exp SEMI
+   28     | ID ASSIGN exp SEMI
+   29     | IF exp THEN LCBRACE stmts RCBRACE SEMI
+   30     | IF exp THEN LCBRACE stmts RCBRACE ELSE LCBRACE stmts RCBRACE SEMI
+   31     | WHILE exp DO LCBRACE stmts RCBRACE SEMI
+   32     | RETURN exp SEMI
+   33     | BREAK SEMI
+   34     | NEXT SEMI
+   35     | PRINT exp SEMI
+   36     | INPUT exp SEMI
+
+   37 exp: ID
+   38    | literais
+   39    | exp ADD exp
+   40    | exp SUB exp
+   41    | exp MUL exp
+   42    | exp DIV exp
+   43    | MOD exp
+   44    | exp POT exp
+   45    | exp EQU exp
+   46    | exp DIF exp
+   47    | exp LESS exp
+   48    | exp BIGG exp
+   49    | exp LEQU exp
+   50    | exp BEQU exp
+   51    | exp AND exp
+   52    | exp OR exp
+   53    | NOT exp
+   54    | SUB exp
+   55    | LPAR exp RPAR
+   56    | ID LPAR exp RPAR
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+ID (258) 6 7 8 9 10 19 27 28 37 56
+LINT (259) 16 20
+LFLOAT (260) 21
+LSTRING (261) 22
+LBOOL (262) 23
+INT (263) 11
+FLOAT (264) 12
+STRING (265) 13
+BOOL (266) 14
+VOID (267) 15
+AND (268) 51
+OR (269) 52
+NOT (270) 53
+EQU (271) 45
+DIF (272) 46
+LEQU (273) 49
+BEQU (274) 50
+LESS (275) 47
+BIGG (276) 48
+ADD (277) 39
+SUB (278) 40 54
+MUL (279) 41
+DIV (280) 42
+MOD (281) 43
+POT (282) 44
+LPAR (283) 6 7 55 56
+RPAR (284) 6 7 55 56
+LRPAR (285) 16
+RRPAR (286) 16
+LCBRACE (287) 6 7 29 30 31
+RCBRACE (288) 6 7 29 30 31
+ASP (289)
+SEMI (290) 4 5 6 7 8 27 28 29 30 31 32 33 34 35 36
+DOT (291)
+DPOINT (292) 4 5 6 7 19
+COMMA (293) 10 18
+ASSIGN (294) 5 28
+DEFINE (295) 8
+IF (296) 29 30
+THEN (297) 29 30
+ELSE (298) 30
+WHILE (299) 31
+DO (300) 31
+RETURN (301) 32
+BREAK (302) 33
+NEXT (303) 34
+PRINT (304) 35
+INPUT (305) 36
+
+
+Nonterminals, with rules where they appear
+
+$accept (51)
+    on left: 0
+program (52)
+    on left: 1, on right: 0
+decls (53)
+    on left: 2 3, on right: 1 3
+decl (54)
+    on left: 4 5 6 7 8, on right: 2 3 26
+ids (55)
+    on left: 9 10, on right: 4 5 10
+type (56)
+    on left: 11 12 13 14 15 16, on right: 4 5 6 7 8 16 19
+argdefs (57)
+    on left: 17 18, on right: 7 18
+argdef (58)
+    on left: 19, on right: 17 18
+literais (59)
+    on left: 20 21 22 23, on right: 38
+stmts (60)
+    on left: 24 25, on right: 6 7 25 29 30 31
+stmt (61)
+    on left: 26 27 28 29 30 31 32 33 34 35 36, on right: 24 25
+exp (62)
+    on left: 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54
+    55 56, on right: 5 27 28 29 30 31 32 35 36 39 40 41 42 43 44 45
+    46 47 48 49 50 51 52 53 54 55 56
+
+
+State 0
+
+    0 $accept: . program $end
+
+    ID      shift, and go to state 1
+    DEFINE  shift, and go to state 2
+
+    program  go to state 3
+    decls    go to state 4
+    decl     go to state 5
+    ids      go to state 6
+
+
+State 1
+
+    6 decl: ID . LPAR RPAR DPOINT type LCBRACE stmts RCBRACE SEMI
+    7     | ID . LPAR argdefs RPAR DPOINT type LCBRACE stmts RCBRACE SEMI
+    9 ids: ID .
+   10    | ID . COMMA ids
+
+    LPAR   shift, and go to state 7
+    COMMA  shift, and go to state 8
+
+    $default  reduce using rule 9 (ids)
+
+
+State 2
+
+    8 decl: DEFINE . ID type SEMI
+
+    ID  shift, and go to state 9
+
+
+State 3
+
+    0 $accept: program . $end
+
+    $end  shift, and go to state 10
+
+
+State 4
+
+    1 program: decls .
+
+    $default  reduce using rule 1 (program)
+
+
+State 5
+
+    2 decls: decl .
+    3      | decl . decls
+
+    ID      shift, and go to state 1
+    DEFINE  shift, and go to state 2
+
+    $default  reduce using rule 2 (decls)
+
+    decls  go to state 11
+    decl   go to state 5
+    ids    go to state 6
+
+
+State 6
+
+    4 decl: ids . DPOINT type SEMI
+    5     | ids . DPOINT type ASSIGN exp SEMI
+
+    DPOINT  shift, and go to state 12
+
+
+State 7
+
+    6 decl: ID LPAR . RPAR DPOINT type LCBRACE stmts RCBRACE SEMI
+    7     | ID LPAR . argdefs RPAR DPOINT type LCBRACE stmts RCBRACE SEMI
+
+    ID    shift, and go to state 13
+    RPAR  shift, and go to state 14
+
+    argdefs  go to state 15
+    argdef   go to state 16
+
+
+State 8
+
+   10 ids: ID COMMA . ids
+
+    ID  shift, and go to state 17
+
+    ids  go to state 18
+
+
+State 9
+
+    8 decl: DEFINE ID . type SEMI
+
+    INT     shift, and go to state 19
+    FLOAT   shift, and go to state 20
+    STRING  shift, and go to state 21
+    BOOL    shift, and go to state 22
+    VOID    shift, and go to state 23
+
+    type  go to state 24
+
+
+State 10
+
+    0 $accept: program $end .
+
+    $default  accept
+
+
+State 11
+
+    3 decls: decl decls .
+
+    $default  reduce using rule 3 (decls)
+
+
+State 12
+
+    4 decl: ids DPOINT . type SEMI
+    5     | ids DPOINT . type ASSIGN exp SEMI
+
+    INT     shift, and go to state 19
+    FLOAT   shift, and go to state 20
+    STRING  shift, and go to state 21
+    BOOL    shift, and go to state 22
+    VOID    shift, and go to state 23
+
+    type  go to state 25
+
+
+State 13
+
+   19 argdef: ID . DPOINT type
+
+    DPOINT  shift, and go to state 26
+
+
+State 14
+
+    6 decl: ID LPAR RPAR . DPOINT type LCBRACE stmts RCBRACE SEMI
+
+    DPOINT  shift, and go to state 27
+
+
+State 15
+
+    7 decl: ID LPAR argdefs . RPAR DPOINT type LCBRACE stmts RCBRACE SEMI
+
+    RPAR  shift, and go to state 28
+
+
+State 16
+
+   17 argdefs: argdef .
+   18        | argdef . COMMA argdefs
+
+    COMMA  shift, and go to state 29
+
+    $default  reduce using rule 17 (argdefs)
+
+
+State 17
+
+    9 ids: ID .
+   10    | ID . COMMA ids
+
+    COMMA  shift, and go to state 8
+
+    $default  reduce using rule 9 (ids)
+
+
+State 18
+
+   10 ids: ID COMMA ids .
+
+    $default  reduce using rule 10 (ids)
+
+
+State 19
+
+   11 type: INT .
+
+    $default  reduce using rule 11 (type)
+
+
+State 20
+
+   12 type: FLOAT .
+
+    $default  reduce using rule 12 (type)
+
+
+State 21
+
+   13 type: STRING .
+
+    $default  reduce using rule 13 (type)
+
+
+State 22
+
+   14 type: BOOL .
+
+    $default  reduce using rule 14 (type)
+
+
+State 23
+
+   15 type: VOID .
+
+    $default  reduce using rule 15 (type)
+
+
+State 24
+
+    8 decl: DEFINE ID type . SEMI
+   16 type: type . RRPAR LINT LRPAR
+
+    RRPAR  shift, and go to state 30
+    SEMI   shift, and go to state 31
+
+
+State 25
+
+    4 decl: ids DPOINT type . SEMI
+    5     | ids DPOINT type . ASSIGN exp SEMI
+   16 type: type . RRPAR LINT LRPAR
+
+    RRPAR   shift, and go to state 30
+    SEMI    shift, and go to state 32
+    ASSIGN  shift, and go to state 33
+
+
+State 26
+
+   19 argdef: ID DPOINT . type
+
+    INT     shift, and go to state 19
+    FLOAT   shift, and go to state 20
+    STRING  shift, and go to state 21
+    BOOL    shift, and go to state 22
+    VOID    shift, and go to state 23
+
+    type  go to state 34
+
+
+State 27
+
+    6 decl: ID LPAR RPAR DPOINT . type LCBRACE stmts RCBRACE SEMI
+
+    INT     shift, and go to state 19
+    FLOAT   shift, and go to state 20
+    STRING  shift, and go to state 21
+    BOOL    shift, and go to state 22
+    VOID    shift, and go to state 23
+
+    type  go to state 35
+
+
+State 28
+
+    7 decl: ID LPAR argdefs RPAR . DPOINT type LCBRACE stmts RCBRACE SEMI
+
+    DPOINT  shift, and go to state 36
+
+
+State 29
+
+   18 argdefs: argdef COMMA . argdefs
+
+    ID  shift, and go to state 13
+
+    argdefs  go to state 37
+    argdef   go to state 16
+
+
+State 30
+
+   16 type: type RRPAR . LINT LRPAR
+
+    LINT  shift, and go to state 38
+
+
+State 31
+
+    8 decl: DEFINE ID type SEMI .
+
+    $default  reduce using rule 8 (decl)
+
+
+State 32
+
+    4 decl: ids DPOINT type SEMI .
+
+    $default  reduce using rule 4 (decl)
+
+
+State 33
+
+    5 decl: ids DPOINT type ASSIGN . exp SEMI
+
+    ID       shift, and go to state 39
+    LINT     shift, and go to state 40
+    LFLOAT   shift, and go to state 41
+    LSTRING  shift, and go to state 42
+    LBOOL    shift, and go to state 43
+    NOT      shift, and go to state 44
+    SUB      shift, and go to state 45
+    MOD      shift, and go to state 46
+    LPAR     shift, and go to state 47
+
+    literais  go to state 48
+    exp       go to state 49
+
+
+State 34
+
+   16 type: type . RRPAR LINT LRPAR
+   19 argdef: ID DPOINT type .
+
+    RRPAR  shift, and go to state 30
+
+    $default  reduce using rule 19 (argdef)
+
+
+State 35
+
+    6 decl: ID LPAR RPAR DPOINT type . LCBRACE stmts RCBRACE SEMI
+   16 type: type . RRPAR LINT LRPAR
+
+    RRPAR    shift, and go to state 30
+    LCBRACE  shift, and go to state 50
+
+
+State 36
+
+    7 decl: ID LPAR argdefs RPAR DPOINT . type LCBRACE stmts RCBRACE SEMI
+
+    INT     shift, and go to state 19
+    FLOAT   shift, and go to state 20
+    STRING  shift, and go to state 21
+    BOOL    shift, and go to state 22
+    VOID    shift, and go to state 23
+
+    type  go to state 51
+
+
+State 37
+
+   18 argdefs: argdef COMMA argdefs .
+
+    $default  reduce using rule 18 (argdefs)
+
+
+State 38
+
+   16 type: type RRPAR LINT . LRPAR
+
+    LRPAR  shift, and go to state 52
+
+
+State 39
+
+   37 exp: ID .
+   56    | ID . LPAR exp RPAR
+
+    LPAR  shift, and go to state 53
+
+    $default  reduce using rule 37 (exp)
+
+
+State 40
+
+   20 literais: LINT .
+
+    $default  reduce using rule 20 (literais)
+
+
+State 41
+
+   21 literais: LFLOAT .
+
+    $default  reduce using rule 21 (literais)
+
+
+State 42
+
+   22 literais: LSTRING .
+
+    $default  reduce using rule 22 (literais)
+
+
+State 43
+
+   23 literais: LBOOL .
+
+    $default  reduce using rule 23 (literais)
+
+
+State 44
+
+   53 exp: NOT . exp
+
+    ID       shift, and go to state 39
+    LINT     shift, and go to state 40
+    LFLOAT   shift, and go to state 41
+    LSTRING  shift, and go to state 42
+    LBOOL    shift, and go to state 43
+    NOT      shift, and go to state 44
+    SUB      shift, and go to state 45
+    MOD      shift, and go to state 46
+    LPAR     shift, and go to state 47
+
+    literais  go to state 48
+    exp       go to state 54
+
+
+State 45
+
+   54 exp: SUB . exp
+
+    ID       shift, and go to state 39
+    LINT     shift, and go to state 40
+    LFLOAT   shift, and go to state 41
+    LSTRING  shift, and go to state 42
+    LBOOL    shift, and go to state 43
+    NOT      shift, and go to state 44
+    SUB      shift, and go to state 45
+    MOD      shift, and go to state 46
+    LPAR     shift, and go to state 47
+
+    literais  go to state 48
+    exp       go to state 55
+
+
+State 46
+
+   43 exp: MOD . exp
+
+    ID       shift, and go to state 39
+    LINT     shift, and go to state 40
+    LFLOAT   shift, and go to state 41
+    LSTRING  shift, and go to state 42
+    LBOOL    shift, and go to state 43
+    NOT      shift, and go to state 44
+    SUB      shift, and go to state 45
+    MOD      shift, and go to state 46
+    LPAR     shift, and go to state 47
+
+    literais  go to state 48
+    exp       go to state 56
+
+
+State 47
+
+   55 exp: LPAR . exp RPAR
+
+    ID       shift, and go to state 39
+    LINT     shift, and go to state 40
+    LFLOAT   shift, and go to state 41
+    LSTRING  shift, and go to state 42
+    LBOOL    shift, and go to state 43
+    NOT      shift, and go to state 44
+    SUB      shift, and go to state 45
+    MOD      shift, and go to state 46
+    LPAR     shift, and go to state 47
+
+    literais  go to state 48
+    exp       go to state 57
+
+
+State 48
+
+   38 exp: literais .
+
+    $default  reduce using rule 38 (exp)
+
+
+State 49
+
+    5 decl: ids DPOINT type ASSIGN exp . SEMI
+   39 exp: exp . ADD exp
+   40    | exp . SUB exp
+   41    | exp . MUL exp
+   42    | exp . DIV exp
+   44    | exp . POT exp
+   45    | exp . EQU exp
+   46    | exp . DIF exp
+   47    | exp . LESS exp
+   48    | exp . BIGG exp
+   49    | exp . LEQU exp
+   50    | exp . BEQU exp
+   51    | exp . AND exp
+   52    | exp . OR exp
+
+    AND   shift, and go to state 58
+    OR    shift, and go to state 59
+    EQU   shift, and go to state 60
+    DIF   shift, and go to state 61
+    LEQU  shift, and go to state 62
+    BEQU  shift, and go to state 63
+    LESS  shift, and go to state 64
+    BIGG  shift, and go to state 65
+    ADD   shift, and go to state 66
+    SUB   shift, and go to state 67
+    MUL   shift, and go to state 68
+    DIV   shift, and go to state 69
+    POT   shift, and go to state 70
+    SEMI  shift, and go to state 71
+
+
+State 50
+
+    6 decl: ID LPAR RPAR DPOINT type LCBRACE . stmts RCBRACE SEMI
+
+    ID      shift, and go to state 72
+    DEFINE  shift, and go to state 2
+    IF      shift, and go to state 73
+    WHILE   shift, and go to state 74
+    RETURN  shift, and go to state 75
+    BREAK   shift, and go to state 76
+    NEXT    shift, and go to state 77
+    PRINT   shift, and go to state 78
+    INPUT   shift, and go to state 79
+
+    decl   go to state 80
+    ids    go to state 6
+    stmts  go to state 81
+    stmt   go to state 82
+
+
+State 51
+
+    7 decl: ID LPAR argdefs RPAR DPOINT type . LCBRACE stmts RCBRACE SEMI
+   16 type: type . RRPAR LINT LRPAR
+
+    RRPAR    shift, and go to state 30
+    LCBRACE  shift, and go to state 83
+
+
+State 52
+
+   16 type: type RRPAR LINT LRPAR .
+
+    $default  reduce using rule 16 (type)
+
+
+State 53
+
+   56 exp: ID LPAR . exp RPAR
+
+    ID       shift, and go to state 39
+    LINT     shift, and go to state 40
+    LFLOAT   shift, and go to state 41
+    LSTRING  shift, and go to state 42
+    LBOOL    shift, and go to state 43
+    NOT      shift, and go to state 44
+    SUB      shift, and go to state 45
+    MOD      shift, and go to state 46
+    LPAR     shift, and go to state 47
+
+    literais  go to state 48
+    exp       go to state 84
+
+
+State 54
+
+   39 exp: exp . ADD exp
+   40    | exp . SUB exp
+   41    | exp . MUL exp
+   42    | exp . DIV exp
+   44    | exp . POT exp
+   45    | exp . EQU exp
+   46    | exp . DIF exp
+   47    | exp . LESS exp
+   48    | exp . BIGG exp
+   49    | exp . LEQU exp
+   50    | exp . BEQU exp
+   51    | exp . AND exp
+   52    | exp . OR exp
+   53    | NOT exp .
+
+    EQU   shift, and go to state 60
+    DIF   shift, and go to state 61
+    LEQU  shift, and go to state 62
+    BEQU  shift, and go to state 63
+    LESS  shift, and go to state 64
+    BIGG  shift, and go to state 65
+    ADD   shift, and go to state 66
+    SUB   shift, and go to state 67
+    MUL   shift, and go to state 68
+    DIV   shift, and go to state 69
+    POT   shift, and go to state 70
+
+    $default  reduce using rule 53 (exp)
+
+
+State 55
+
+   39 exp: exp . ADD exp
+   40    | exp . SUB exp
+   41    | exp . MUL exp
+   42    | exp . DIV exp
+   44    | exp . POT exp
+   45    | exp . EQU exp
+   46    | exp . DIF exp
+   47    | exp . LESS exp
+   48    | exp . BIGG exp
+   49    | exp . LEQU exp
+   50    | exp . BEQU exp
+   51    | exp . AND exp
+   52    | exp . OR exp
+   54    | SUB exp .
+
+    MUL  shift, and go to state 68
+    DIV  shift, and go to state 69
+    POT  shift, and go to state 70
+
+    $default  reduce using rule 54 (exp)
+
+
+State 56
+
+   39 exp: exp . ADD exp
+   40    | exp . SUB exp
+   41    | exp . MUL exp
+   42    | exp . DIV exp
+   43    | MOD exp .
+   44    | exp . POT exp
+   45    | exp . EQU exp
+   46    | exp . DIF exp
+   47    | exp . LESS exp
+   48    | exp . BIGG exp
+   49    | exp . LEQU exp
+   50    | exp . BEQU exp
+   51    | exp . AND exp
+   52    | exp . OR exp
+
+    POT  shift, and go to state 70
+
+    $default  reduce using rule 43 (exp)
+
+
+State 57
+
+   39 exp: exp . ADD exp
+   40    | exp . SUB exp
+   41    | exp . MUL exp
+   42    | exp . DIV exp
+   44    | exp . POT exp
+   45    | exp . EQU exp
+   46    | exp . DIF exp
+   47    | exp . LESS exp
+   48    | exp . BIGG exp
+   49    | exp . LEQU exp
+   50    | exp . BEQU exp
+   51    | exp . AND exp
+   52    | exp . OR exp
+   55    | LPAR exp . RPAR
+
+    AND   shift, and go to state 58
+    OR    shift, and go to state 59
+    EQU   shift, and go to state 60
+    DIF   shift, and go to state 61
+    LEQU  shift, and go to state 62
+    BEQU  shift, and go to state 63
+    LESS  shift, and go to state 64
+    BIGG  shift, and go to state 65
+    ADD   shift, and go to state 66
+    SUB   shift, and go to state 67
+    MUL   shift, and go to state 68
+    DIV   shift, and go to state 69
+    POT   shift, and go to state 70
+    RPAR  shift, and go to state 85
+
+
+State 58
+
+   51 exp: exp AND . exp
+
+    ID       shift, and go to state 39
+    LINT     shift, and go to state 40
+    LFLOAT   shift, and go to state 41
+    LSTRING  shift, and go to state 42
+    LBOOL    shift, and go to state 43
+    NOT      shift, and go to state 44
+    SUB      shift, and go to state 45
+    MOD      shift, and go to state 46
+    LPAR     shift, and go to state 47
+
+    literais  go to state 48
+    exp       go to state 86
+
+
+State 59
+
+   52 exp: exp OR . exp
+
+    ID       shift, and go to state 39
+    LINT     shift, and go to state 40
+    LFLOAT   shift, and go to state 41
+    LSTRING  shift, and go to state 42
+    LBOOL    shift, and go to state 43
+    NOT      shift, and go to state 44
+    SUB      shift, and go to state 45
+    MOD      shift, and go to state 46
+    LPAR     shift, and go to state 47
+
+    literais  go to state 48
+    exp       go to state 87
+
+
+State 60
+
+   45 exp: exp EQU . exp
+
+    ID       shift, and go to state 39
+    LINT     shift, and go to state 40
+    LFLOAT   shift, and go to state 41
+    LSTRING  shift, and go to state 42
+    LBOOL    shift, and go to state 43
+    NOT      shift, and go to state 44
+    SUB      shift, and go to state 45
+    MOD      shift, and go to state 46
+    LPAR     shift, and go to state 47
+
+    literais  go to state 48
+    exp       go to state 88
+
+
+State 61
+
+   46 exp: exp DIF . exp
+
+    ID       shift, and go to state 39
+    LINT     shift, and go to state 40
+    LFLOAT   shift, and go to state 41
+    LSTRING  shift, and go to state 42
+    LBOOL    shift, and go to state 43
+    NOT      shift, and go to state 44
+    SUB      shift, and go to state 45
+    MOD      shift, and go to state 46
+    LPAR     shift, and go to state 47
+
+    literais  go to state 48
+    exp       go to state 89
+
+
+State 62
+
+   49 exp: exp LEQU . exp
+
+    ID       shift, and go to state 39
+    LINT     shift, and go to state 40
+    LFLOAT   shift, and go to state 41
+    LSTRING  shift, and go to state 42
+    LBOOL    shift, and go to state 43
+    NOT      shift, and go to state 44
+    SUB      shift, and go to state 45
+    MOD      shift, and go to state 46
+    LPAR     shift, and go to state 47
+
+    literais  go to state 48
+    exp       go to state 90
+
+
+State 63
+
+   50 exp: exp BEQU . exp
+
+    ID       shift, and go to state 39
+    LINT     shift, and go to state 40
+    LFLOAT   shift, and go to state 41
+    LSTRING  shift, and go to state 42
+    LBOOL    shift, and go to state 43
+    NOT      shift, and go to state 44
+    SUB      shift, and go to state 45
+    MOD      shift, and go to state 46
+    LPAR     shift, and go to state 47
+
+    literais  go to state 48
+    exp       go to state 91
+
+
+State 64
+
+   47 exp: exp LESS . exp
+
+    ID       shift, and go to state 39
+    LINT     shift, and go to state 40
+    LFLOAT   shift, and go to state 41
+    LSTRING  shift, and go to state 42
+    LBOOL    shift, and go to state 43
+    NOT      shift, and go to state 44
+    SUB      shift, and go to state 45
+    MOD      shift, and go to state 46
+    LPAR     shift, and go to state 47
+
+    literais  go to state 48
+    exp       go to state 92
+
+
+State 65
+
+   48 exp: exp BIGG . exp
+
+    ID       shift, and go to state 39
+    LINT     shift, and go to state 40
+    LFLOAT   shift, and go to state 41
+    LSTRING  shift, and go to state 42
+    LBOOL    shift, and go to state 43
+    NOT      shift, and go to state 44
+    SUB      shift, and go to state 45
+    MOD      shift, and go to state 46
+    LPAR     shift, and go to state 47
+
+    literais  go to state 48
+    exp       go to state 93
+
+
+State 66
+
+   39 exp: exp ADD . exp
+
+    ID       shift, and go to state 39
+    LINT     shift, and go to state 40
+    LFLOAT   shift, and go to state 41
+    LSTRING  shift, and go to state 42
+    LBOOL    shift, and go to state 43
+    NOT      shift, and go to state 44
+    SUB      shift, and go to state 45
+    MOD      shift, and go to state 46
+    LPAR     shift, and go to state 47
+
+    literais  go to state 48
+    exp       go to state 94
+
+
+State 67
+
+   40 exp: exp SUB . exp
+
+    ID       shift, and go to state 39
+    LINT     shift, and go to state 40
+    LFLOAT   shift, and go to state 41
+    LSTRING  shift, and go to state 42
+    LBOOL    shift, and go to state 43
+    NOT      shift, and go to state 44
+    SUB      shift, and go to state 45
+    MOD      shift, and go to state 46
+    LPAR     shift, and go to state 47
+
+    literais  go to state 48
+    exp       go to state 95
+
+
+State 68
+
+   41 exp: exp MUL . exp
+
+    ID       shift, and go to state 39
+    LINT     shift, and go to state 40
+    LFLOAT   shift, and go to state 41
+    LSTRING  shift, and go to state 42
+    LBOOL    shift, and go to state 43
+    NOT      shift, and go to state 44
+    SUB      shift, and go to state 45
+    MOD      shift, and go to state 46
+    LPAR     shift, and go to state 47
+
+    literais  go to state 48
+    exp       go to state 96
+
+
+State 69
+
+   42 exp: exp DIV . exp
+
+    ID       shift, and go to state 39
+    LINT     shift, and go to state 40
+    LFLOAT   shift, and go to state 41
+    LSTRING  shift, and go to state 42
+    LBOOL    shift, and go to state 43
+    NOT      shift, and go to state 44
+    SUB      shift, and go to state 45
+    MOD      shift, and go to state 46
+    LPAR     shift, and go to state 47
+
+    literais  go to state 48
+    exp       go to state 97
+
+
+State 70
+
+   44 exp: exp POT . exp
+
+    ID       shift, and go to state 39
+    LINT     shift, and go to state 40
+    LFLOAT   shift, and go to state 41
+    LSTRING  shift, and go to state 42
+    LBOOL    shift, and go to state 43
+    NOT      shift, and go to state 44
+    SUB      shift, and go to state 45
+    MOD      shift, and go to state 46
+    LPAR     shift, and go to state 47
+
+    literais  go to state 48
+    exp       go to state 98
+
+
+State 71
+
+    5 decl: ids DPOINT type ASSIGN exp SEMI .
+
+    $default  reduce using rule 5 (decl)
+
+
+State 72
+
+    6 decl: ID . LPAR RPAR DPOINT type LCBRACE stmts RCBRACE SEMI
+    7     | ID . LPAR argdefs RPAR DPOINT type LCBRACE stmts RCBRACE SEMI
+    9 ids: ID .
+   10    | ID . COMMA ids
+   27 stmt: ID . exp SEMI
+   28     | ID . ASSIGN exp SEMI
+
+    ID       shift, and go to state 39
+    LINT     shift, and go to state 40
+    LFLOAT   shift, and go to state 41
+    LSTRING  shift, and go to state 42
+    LBOOL    shift, and go to state 43
+    NOT      shift, and go to state 44
+    SUB      shift, and go to state 45
+    MOD      shift, and go to state 46
+    LPAR     shift, and go to state 99
+    COMMA    shift, and go to state 8
+    ASSIGN   shift, and go to state 100
+
+    $default  reduce using rule 9 (ids)
+
+    literais  go to state 48
+    exp       go to state 101
+
+
+State 73
+
+   29 stmt: IF . exp THEN LCBRACE stmts RCBRACE SEMI
+   30     | IF . exp THEN LCBRACE stmts RCBRACE ELSE LCBRACE stmts RCBRACE SEMI
+
+    ID       shift, and go to state 39
+    LINT     shift, and go to state 40
+    LFLOAT   shift, and go to state 41
+    LSTRING  shift, and go to state 42
+    LBOOL    shift, and go to state 43
+    NOT      shift, and go to state 44
+    SUB      shift, and go to state 45
+    MOD      shift, and go to state 46
+    LPAR     shift, and go to state 47
+
+    literais  go to state 48
+    exp       go to state 102
+
+
+State 74
+
+   31 stmt: WHILE . exp DO LCBRACE stmts RCBRACE SEMI
+
+    ID       shift, and go to state 39
+    LINT     shift, and go to state 40
+    LFLOAT   shift, and go to state 41
+    LSTRING  shift, and go to state 42
+    LBOOL    shift, and go to state 43
+    NOT      shift, and go to state 44
+    SUB      shift, and go to state 45
+    MOD      shift, and go to state 46
+    LPAR     shift, and go to state 47
+
+    literais  go to state 48
+    exp       go to state 103
+
+
+State 75
+
+   32 stmt: RETURN . exp SEMI
+
+    ID       shift, and go to state 39
+    LINT     shift, and go to state 40
+    LFLOAT   shift, and go to state 41
+    LSTRING  shift, and go to state 42
+    LBOOL    shift, and go to state 43
+    NOT      shift, and go to state 44
+    SUB      shift, and go to state 45
+    MOD      shift, and go to state 46
+    LPAR     shift, and go to state 47
+
+    literais  go to state 48
+    exp       go to state 104
+
+
+State 76
+
+   33 stmt: BREAK . SEMI
+
+    SEMI  shift, and go to state 105
+
+
+State 77
+
+   34 stmt: NEXT . SEMI
+
+    SEMI  shift, and go to state 106
+
+
+State 78
+
+   35 stmt: PRINT . exp SEMI
+
+    ID       shift, and go to state 39
+    LINT     shift, and go to state 40
+    LFLOAT   shift, and go to state 41
+    LSTRING  shift, and go to state 42
+    LBOOL    shift, and go to state 43
+    NOT      shift, and go to state 44
+    SUB      shift, and go to state 45
+    MOD      shift, and go to state 46
+    LPAR     shift, and go to state 47
+
+    literais  go to state 48
+    exp       go to state 107
+
+
+State 79
+
+   36 stmt: INPUT . exp SEMI
+
+    ID       shift, and go to state 39
+    LINT     shift, and go to state 40
+    LFLOAT   shift, and go to state 41
+    LSTRING  shift, and go to state 42
+    LBOOL    shift, and go to state 43
+    NOT      shift, and go to state 44
+    SUB      shift, and go to state 45
+    MOD      shift, and go to state 46
+    LPAR     shift, and go to state 47
+
+    literais  go to state 48
+    exp       go to state 108
+
+
+State 80
+
+   26 stmt: decl .
+
+    $default  reduce using rule 26 (stmt)
+
+
+State 81
+
+    6 decl: ID LPAR RPAR DPOINT type LCBRACE stmts . RCBRACE SEMI
+
+    RCBRACE  shift, and go to state 109
+
+
+State 82
+
+   24 stmts: stmt .
+   25      | stmt . stmts
+
+    ID      shift, and go to state 72
+    DEFINE  shift, and go to state 2
+    IF      shift, and go to state 73
+    WHILE   shift, and go to state 74
+    RETURN  shift, and go to state 75
+    BREAK   shift, and go to state 76
+    NEXT    shift, and go to state 77
+    PRINT   shift, and go to state 78
+    INPUT   shift, and go to state 79
+
+    $default  reduce using rule 24 (stmts)
+
+    decl   go to state 80
+    ids    go to state 6
+    stmts  go to state 110
+    stmt   go to state 82
+
+
+State 83
+
+    7 decl: ID LPAR argdefs RPAR DPOINT type LCBRACE . stmts RCBRACE SEMI
+
+    ID      shift, and go to state 72
+    DEFINE  shift, and go to state 2
+    IF      shift, and go to state 73
+    WHILE   shift, and go to state 74
+    RETURN  shift, and go to state 75
+    BREAK   shift, and go to state 76
+    NEXT    shift, and go to state 77
+    PRINT   shift, and go to state 78
+    INPUT   shift, and go to state 79
+
+    decl   go to state 80
+    ids    go to state 6
+    stmts  go to state 111
+    stmt   go to state 82
+
+
+State 84
+
+   39 exp: exp . ADD exp
+   40    | exp . SUB exp
+   41    | exp . MUL exp
+   42    | exp . DIV exp
+   44    | exp . POT exp
+   45    | exp . EQU exp
+   46    | exp . DIF exp
+   47    | exp . LESS exp
+   48    | exp . BIGG exp
+   49    | exp . LEQU exp
+   50    | exp . BEQU exp
+   51    | exp . AND exp
+   52    | exp . OR exp
+   56    | ID LPAR exp . RPAR
+
+    AND   shift, and go to state 58
+    OR    shift, and go to state 59
+    EQU   shift, and go to state 60
+    DIF   shift, and go to state 61
+    LEQU  shift, and go to state 62
+    BEQU  shift, and go to state 63
+    LESS  shift, and go to state 64
+    BIGG  shift, and go to state 65
+    ADD   shift, and go to state 66
+    SUB   shift, and go to state 67
+    MUL   shift, and go to state 68
+    DIV   shift, and go to state 69
+    POT   shift, and go to state 70
+    RPAR  shift, and go to state 112
+
+
+State 85
+
+   55 exp: LPAR exp RPAR .
+
+    $default  reduce using rule 55 (exp)
+
+
+State 86
+
+   39 exp: exp . ADD exp
+   40    | exp . SUB exp
+   41    | exp . MUL exp
+   42    | exp . DIV exp
+   44    | exp . POT exp
+   45    | exp . EQU exp
+   46    | exp . DIF exp
+   47    | exp . LESS exp
+   48    | exp . BIGG exp
+   49    | exp . LEQU exp
+   50    | exp . BEQU exp
+   51    | exp . AND exp
+   51    | exp AND exp .
+   52    | exp . OR exp
+
+    EQU   shift, and go to state 60
+    DIF   shift, and go to state 61
+    LEQU  shift, and go to state 62
+    BEQU  shift, and go to state 63
+    LESS  shift, and go to state 64
+    BIGG  shift, and go to state 65
+    ADD   shift, and go to state 66
+    SUB   shift, and go to state 67
+    MUL   shift, and go to state 68
+    DIV   shift, and go to state 69
+    POT   shift, and go to state 70
+
+    $default  reduce using rule 51 (exp)
+
+
+State 87
+
+   39 exp: exp . ADD exp
+   40    | exp . SUB exp
+   41    | exp . MUL exp
+   42    | exp . DIV exp
+   44    | exp . POT exp
+   45    | exp . EQU exp
+   46    | exp . DIF exp
+   47    | exp . LESS exp
+   48    | exp . BIGG exp
+   49    | exp . LEQU exp
+   50    | exp . BEQU exp
+   51    | exp . AND exp
+   52    | exp . OR exp
+   52    | exp OR exp .
+
+    EQU   shift, and go to state 60
+    DIF   shift, and go to state 61
+    LEQU  shift, and go to state 62
+    BEQU  shift, and go to state 63
+    LESS  shift, and go to state 64
+    BIGG  shift, and go to state 65
+    ADD   shift, and go to state 66
+    SUB   shift, and go to state 67
+    MUL   shift, and go to state 68
+    DIV   shift, and go to state 69
+    POT   shift, and go to state 70
+
+    $default  reduce using rule 52 (exp)
+
+
+State 88
+
+   39 exp: exp . ADD exp
+   40    | exp . SUB exp
+   41    | exp . MUL exp
+   42    | exp . DIV exp
+   44    | exp . POT exp
+   45    | exp . EQU exp
+   45    | exp EQU exp .
+   46    | exp . DIF exp
+   47    | exp . LESS exp
+   48    | exp . BIGG exp
+   49    | exp . LEQU exp
+   50    | exp . BEQU exp
+   51    | exp . AND exp
+   52    | exp . OR exp
+
+    ADD  shift, and go to state 66
+    SUB  shift, and go to state 67
+    MUL  shift, and go to state 68
+    DIV  shift, and go to state 69
+    POT  shift, and go to state 70
+
+    EQU   error (nonassociative)
+    DIF   error (nonassociative)
+    LEQU  error (nonassociative)
+    BEQU  error (nonassociative)
+    LESS  error (nonassociative)
+    BIGG  error (nonassociative)
+
+    $default  reduce using rule 45 (exp)
+
+
+State 89
+
+   39 exp: exp . ADD exp
+   40    | exp . SUB exp
+   41    | exp . MUL exp
+   42    | exp . DIV exp
+   44    | exp . POT exp
+   45    | exp . EQU exp
+   46    | exp . DIF exp
+   46    | exp DIF exp .
+   47    | exp . LESS exp
+   48    | exp . BIGG exp
+   49    | exp . LEQU exp
+   50    | exp . BEQU exp
+   51    | exp . AND exp
+   52    | exp . OR exp
+
+    ADD  shift, and go to state 66
+    SUB  shift, and go to state 67
+    MUL  shift, and go to state 68
+    DIV  shift, and go to state 69
+    POT  shift, and go to state 70
+
+    EQU   error (nonassociative)
+    DIF   error (nonassociative)
+    LEQU  error (nonassociative)
+    BEQU  error (nonassociative)
+    LESS  error (nonassociative)
+    BIGG  error (nonassociative)
+
+    $default  reduce using rule 46 (exp)
+
+
+State 90
+
+   39 exp: exp . ADD exp
+   40    | exp . SUB exp
+   41    | exp . MUL exp
+   42    | exp . DIV exp
+   44    | exp . POT exp
+   45    | exp . EQU exp
+   46    | exp . DIF exp
+   47    | exp . LESS exp
+   48    | exp . BIGG exp
+   49    | exp . LEQU exp
+   49    | exp LEQU exp .
+   50    | exp . BEQU exp
+   51    | exp . AND exp
+   52    | exp . OR exp
+
+    ADD  shift, and go to state 66
+    SUB  shift, and go to state 67
+    MUL  shift, and go to state 68
+    DIV  shift, and go to state 69
+    POT  shift, and go to state 70
+
+    EQU   error (nonassociative)
+    DIF   error (nonassociative)
+    LEQU  error (nonassociative)
+    BEQU  error (nonassociative)
+    LESS  error (nonassociative)
+    BIGG  error (nonassociative)
+
+    $default  reduce using rule 49 (exp)
+
+
+State 91
+
+   39 exp: exp . ADD exp
+   40    | exp . SUB exp
+   41    | exp . MUL exp
+   42    | exp . DIV exp
+   44    | exp . POT exp
+   45    | exp . EQU exp
+   46    | exp . DIF exp
+   47    | exp . LESS exp
+   48    | exp . BIGG exp
+   49    | exp . LEQU exp
+   50    | exp . BEQU exp
+   50    | exp BEQU exp .
+   51    | exp . AND exp
+   52    | exp . OR exp
+
+    ADD  shift, and go to state 66
+    SUB  shift, and go to state 67
+    MUL  shift, and go to state 68
+    DIV  shift, and go to state 69
+    POT  shift, and go to state 70
+
+    EQU   error (nonassociative)
+    DIF   error (nonassociative)
+    LEQU  error (nonassociative)
+    BEQU  error (nonassociative)
+    LESS  error (nonassociative)
+    BIGG  error (nonassociative)
+
+    $default  reduce using rule 50 (exp)
+
+
+State 92
+
+   39 exp: exp . ADD exp
+   40    | exp . SUB exp
+   41    | exp . MUL exp
+   42    | exp . DIV exp
+   44    | exp . POT exp
+   45    | exp . EQU exp
+   46    | exp . DIF exp
+   47    | exp . LESS exp
+   47    | exp LESS exp .
+   48    | exp . BIGG exp
+   49    | exp . LEQU exp
+   50    | exp . BEQU exp
+   51    | exp . AND exp
+   52    | exp . OR exp
+
+    ADD  shift, and go to state 66
+    SUB  shift, and go to state 67
+    MUL  shift, and go to state 68
+    DIV  shift, and go to state 69
+    POT  shift, and go to state 70
+
+    EQU   error (nonassociative)
+    DIF   error (nonassociative)
+    LEQU  error (nonassociative)
+    BEQU  error (nonassociative)
+    LESS  error (nonassociative)
+    BIGG  error (nonassociative)
+
+    $default  reduce using rule 47 (exp)
+
+
+State 93
+
+   39 exp: exp . ADD exp
+   40    | exp . SUB exp
+   41    | exp . MUL exp
+   42    | exp . DIV exp
+   44    | exp . POT exp
+   45    | exp . EQU exp
+   46    | exp . DIF exp
+   47    | exp . LESS exp
+   48    | exp . BIGG exp
+   48    | exp BIGG exp .
+   49    | exp . LEQU exp
+   50    | exp . BEQU exp
+   51    | exp . AND exp
+   52    | exp . OR exp
+
+    ADD  shift, and go to state 66
+    SUB  shift, and go to state 67
+    MUL  shift, and go to state 68
+    DIV  shift, and go to state 69
+    POT  shift, and go to state 70
+
+    EQU   error (nonassociative)
+    DIF   error (nonassociative)
+    LEQU  error (nonassociative)
+    BEQU  error (nonassociative)
+    LESS  error (nonassociative)
+    BIGG  error (nonassociative)
+
+    $default  reduce using rule 48 (exp)
+
+
+State 94
+
+   39 exp: exp . ADD exp
+   39    | exp ADD exp .
+   40    | exp . SUB exp
+   41    | exp . MUL exp
+   42    | exp . DIV exp
+   44    | exp . POT exp
+   45    | exp . EQU exp
+   46    | exp . DIF exp
+   47    | exp . LESS exp
+   48    | exp . BIGG exp
+   49    | exp . LEQU exp
+   50    | exp . BEQU exp
+   51    | exp . AND exp
+   52    | exp . OR exp
+
+    MUL  shift, and go to state 68
+    DIV  shift, and go to state 69
+    POT  shift, and go to state 70
+
+    $default  reduce using rule 39 (exp)
+
+
+State 95
+
+   39 exp: exp . ADD exp
+   40    | exp . SUB exp
+   40    | exp SUB exp .
+   41    | exp . MUL exp
+   42    | exp . DIV exp
+   44    | exp . POT exp
+   45    | exp . EQU exp
+   46    | exp . DIF exp
+   47    | exp . LESS exp
+   48    | exp . BIGG exp
+   49    | exp . LEQU exp
+   50    | exp . BEQU exp
+   51    | exp . AND exp
+   52    | exp . OR exp
+
+    MUL  shift, and go to state 68
+    DIV  shift, and go to state 69
+    POT  shift, and go to state 70
+
+    $default  reduce using rule 40 (exp)
+
+
+State 96
+
+   39 exp: exp . ADD exp
+   40    | exp . SUB exp
+   41    | exp . MUL exp
+   41    | exp MUL exp .
+   42    | exp . DIV exp
+   44    | exp . POT exp
+   45    | exp . EQU exp
+   46    | exp . DIF exp
+   47    | exp . LESS exp
+   48    | exp . BIGG exp
+   49    | exp . LEQU exp
+   50    | exp . BEQU exp
+   51    | exp . AND exp
+   52    | exp . OR exp
+
+    POT  shift, and go to state 70
+
+    $default  reduce using rule 41 (exp)
+
+
+State 97
+
+   39 exp: exp . ADD exp
+   40    | exp . SUB exp
+   41    | exp . MUL exp
+   42    | exp . DIV exp
+   42    | exp DIV exp .
+   44    | exp . POT exp
+   45    | exp . EQU exp
+   46    | exp . DIF exp
+   47    | exp . LESS exp
+   48    | exp . BIGG exp
+   49    | exp . LEQU exp
+   50    | exp . BEQU exp
+   51    | exp . AND exp
+   52    | exp . OR exp
+
+    POT  shift, and go to state 70
+
+    $default  reduce using rule 42 (exp)
+
+
+State 98
+
+   39 exp: exp . ADD exp
+   40    | exp . SUB exp
+   41    | exp . MUL exp
+   42    | exp . DIV exp
+   44    | exp . POT exp
+   44    | exp POT exp .
+   45    | exp . EQU exp
+   46    | exp . DIF exp
+   47    | exp . LESS exp
+   48    | exp . BIGG exp
+   49    | exp . LEQU exp
+   50    | exp . BEQU exp
+   51    | exp . AND exp
+   52    | exp . OR exp
+
+    POT  shift, and go to state 70
+
+    $default  reduce using rule 44 (exp)
+
+
+State 99
+
+    6 decl: ID LPAR . RPAR DPOINT type LCBRACE stmts RCBRACE SEMI
+    7     | ID LPAR . argdefs RPAR DPOINT type LCBRACE stmts RCBRACE SEMI
+   55 exp: LPAR . exp RPAR
+
+    ID       shift, and go to state 113
+    LINT     shift, and go to state 40
+    LFLOAT   shift, and go to state 41
+    LSTRING  shift, and go to state 42
+    LBOOL    shift, and go to state 43
+    NOT      shift, and go to state 44
+    SUB      shift, and go to state 45
+    MOD      shift, and go to state 46
+    LPAR     shift, and go to state 47
+    RPAR     shift, and go to state 14
+
+    argdefs   go to state 15
+    argdef    go to state 16
+    literais  go to state 48
+    exp       go to state 57
+
+
+State 100
+
+   28 stmt: ID ASSIGN . exp SEMI
+
+    ID       shift, and go to state 39
+    LINT     shift, and go to state 40
+    LFLOAT   shift, and go to state 41
+    LSTRING  shift, and go to state 42
+    LBOOL    shift, and go to state 43
+    NOT      shift, and go to state 44
+    SUB      shift, and go to state 45
+    MOD      shift, and go to state 46
+    LPAR     shift, and go to state 47
+
+    literais  go to state 48
+    exp       go to state 114
+
+
+State 101
+
+   27 stmt: ID exp . SEMI
+   39 exp: exp . ADD exp
+   40    | exp . SUB exp
+   41    | exp . MUL exp
+   42    | exp . DIV exp
+   44    | exp . POT exp
+   45    | exp . EQU exp
+   46    | exp . DIF exp
+   47    | exp . LESS exp
+   48    | exp . BIGG exp
+   49    | exp . LEQU exp
+   50    | exp . BEQU exp
+   51    | exp . AND exp
+   52    | exp . OR exp
+
+    AND   shift, and go to state 58
+    OR    shift, and go to state 59
+    EQU   shift, and go to state 60
+    DIF   shift, and go to state 61
+    LEQU  shift, and go to state 62
+    BEQU  shift, and go to state 63
+    LESS  shift, and go to state 64
+    BIGG  shift, and go to state 65
+    ADD   shift, and go to state 66
+    SUB   shift, and go to state 67
+    MUL   shift, and go to state 68
+    DIV   shift, and go to state 69
+    POT   shift, and go to state 70
+    SEMI  shift, and go to state 115
+
+
+State 102
+
+   29 stmt: IF exp . THEN LCBRACE stmts RCBRACE SEMI
+   30     | IF exp . THEN LCBRACE stmts RCBRACE ELSE LCBRACE stmts RCBRACE SEMI
+   39 exp: exp . ADD exp
+   40    | exp . SUB exp
+   41    | exp . MUL exp
+   42    | exp . DIV exp
+   44    | exp . POT exp
+   45    | exp . EQU exp
+   46    | exp . DIF exp
+   47    | exp . LESS exp
+   48    | exp . BIGG exp
+   49    | exp . LEQU exp
+   50    | exp . BEQU exp
+   51    | exp . AND exp
+   52    | exp . OR exp
+
+    AND   shift, and go to state 58
+    OR    shift, and go to state 59
+    EQU   shift, and go to state 60
+    DIF   shift, and go to state 61
+    LEQU  shift, and go to state 62
+    BEQU  shift, and go to state 63
+    LESS  shift, and go to state 64
+    BIGG  shift, and go to state 65
+    ADD   shift, and go to state 66
+    SUB   shift, and go to state 67
+    MUL   shift, and go to state 68
+    DIV   shift, and go to state 69
+    POT   shift, and go to state 70
+    THEN  shift, and go to state 116
+
+
+State 103
+
+   31 stmt: WHILE exp . DO LCBRACE stmts RCBRACE SEMI
+   39 exp: exp . ADD exp
+   40    | exp . SUB exp
+   41    | exp . MUL exp
+   42    | exp . DIV exp
+   44    | exp . POT exp
+   45    | exp . EQU exp
+   46    | exp . DIF exp
+   47    | exp . LESS exp
+   48    | exp . BIGG exp
+   49    | exp . LEQU exp
+   50    | exp . BEQU exp
+   51    | exp . AND exp
+   52    | exp . OR exp
+
+    AND   shift, and go to state 58
+    OR    shift, and go to state 59
+    EQU   shift, and go to state 60
+    DIF   shift, and go to state 61
+    LEQU  shift, and go to state 62
+    BEQU  shift, and go to state 63
+    LESS  shift, and go to state 64
+    BIGG  shift, and go to state 65
+    ADD   shift, and go to state 66
+    SUB   shift, and go to state 67
+    MUL   shift, and go to state 68
+    DIV   shift, and go to state 69
+    POT   shift, and go to state 70
+    DO    shift, and go to state 117
+
+
+State 104
+
+   32 stmt: RETURN exp . SEMI
+   39 exp: exp . ADD exp
+   40    | exp . SUB exp
+   41    | exp . MUL exp
+   42    | exp . DIV exp
+   44    | exp . POT exp
+   45    | exp . EQU exp
+   46    | exp . DIF exp
+   47    | exp . LESS exp
+   48    | exp . BIGG exp
+   49    | exp . LEQU exp
+   50    | exp . BEQU exp
+   51    | exp . AND exp
+   52    | exp . OR exp
+
+    AND   shift, and go to state 58
+    OR    shift, and go to state 59
+    EQU   shift, and go to state 60
+    DIF   shift, and go to state 61
+    LEQU  shift, and go to state 62
+    BEQU  shift, and go to state 63
+    LESS  shift, and go to state 64
+    BIGG  shift, and go to state 65
+    ADD   shift, and go to state 66
+    SUB   shift, and go to state 67
+    MUL   shift, and go to state 68
+    DIV   shift, and go to state 69
+    POT   shift, and go to state 70
+    SEMI  shift, and go to state 118
+
+
+State 105
+
+   33 stmt: BREAK SEMI .
+
+    $default  reduce using rule 33 (stmt)
+
+
+State 106
+
+   34 stmt: NEXT SEMI .
+
+    $default  reduce using rule 34 (stmt)
+
+
+State 107
+
+   35 stmt: PRINT exp . SEMI
+   39 exp: exp . ADD exp
+   40    | exp . SUB exp
+   41    | exp . MUL exp
+   42    | exp . DIV exp
+   44    | exp . POT exp
+   45    | exp . EQU exp
+   46    | exp . DIF exp
+   47    | exp . LESS exp
+   48    | exp . BIGG exp
+   49    | exp . LEQU exp
+   50    | exp . BEQU exp
+   51    | exp . AND exp
+   52    | exp . OR exp
+
+    AND   shift, and go to state 58
+    OR    shift, and go to state 59
+    EQU   shift, and go to state 60
+    DIF   shift, and go to state 61
+    LEQU  shift, and go to state 62
+    BEQU  shift, and go to state 63
+    LESS  shift, and go to state 64
+    BIGG  shift, and go to state 65
+    ADD   shift, and go to state 66
+    SUB   shift, and go to state 67
+    MUL   shift, and go to state 68
+    DIV   shift, and go to state 69
+    POT   shift, and go to state 70
+    SEMI  shift, and go to state 119
+
+
+State 108
+
+   36 stmt: INPUT exp . SEMI
+   39 exp: exp . ADD exp
+   40    | exp . SUB exp
+   41    | exp . MUL exp
+   42    | exp . DIV exp
+   44    | exp . POT exp
+   45    | exp . EQU exp
+   46    | exp . DIF exp
+   47    | exp . LESS exp
+   48    | exp . BIGG exp
+   49    | exp . LEQU exp
+   50    | exp . BEQU exp
+   51    | exp . AND exp
+   52    | exp . OR exp
+
+    AND   shift, and go to state 58
+    OR    shift, and go to state 59
+    EQU   shift, and go to state 60
+    DIF   shift, and go to state 61
+    LEQU  shift, and go to state 62
+    BEQU  shift, and go to state 63
+    LESS  shift, and go to state 64
+    BIGG  shift, and go to state 65
+    ADD   shift, and go to state 66
+    SUB   shift, and go to state 67
+    MUL   shift, and go to state 68
+    DIV   shift, and go to state 69
+    POT   shift, and go to state 70
+    SEMI  shift, and go to state 120
+
+
+State 109
+
+    6 decl: ID LPAR RPAR DPOINT type LCBRACE stmts RCBRACE . SEMI
+
+    SEMI  shift, and go to state 121
+
+
+State 110
+
+   25 stmts: stmt stmts .
+
+    $default  reduce using rule 25 (stmts)
+
+
+State 111
+
+    7 decl: ID LPAR argdefs RPAR DPOINT type LCBRACE stmts . RCBRACE SEMI
+
+    RCBRACE  shift, and go to state 122
+
+
+State 112
+
+   56 exp: ID LPAR exp RPAR .
+
+    $default  reduce using rule 56 (exp)
+
+
+State 113
+
+   19 argdef: ID . DPOINT type
+   37 exp: ID .
+   56    | ID . LPAR exp RPAR
+
+    LPAR    shift, and go to state 53
+    DPOINT  shift, and go to state 26
+
+    $default  reduce using rule 37 (exp)
+
+
+State 114
+
+   28 stmt: ID ASSIGN exp . SEMI
+   39 exp: exp . ADD exp
+   40    | exp . SUB exp
+   41    | exp . MUL exp
+   42    | exp . DIV exp
+   44    | exp . POT exp
+   45    | exp . EQU exp
+   46    | exp . DIF exp
+   47    | exp . LESS exp
+   48    | exp . BIGG exp
+   49    | exp . LEQU exp
+   50    | exp . BEQU exp
+   51    | exp . AND exp
+   52    | exp . OR exp
+
+    AND   shift, and go to state 58
+    OR    shift, and go to state 59
+    EQU   shift, and go to state 60
+    DIF   shift, and go to state 61
+    LEQU  shift, and go to state 62
+    BEQU  shift, and go to state 63
+    LESS  shift, and go to state 64
+    BIGG  shift, and go to state 65
+    ADD   shift, and go to state 66
+    SUB   shift, and go to state 67
+    MUL   shift, and go to state 68
+    DIV   shift, and go to state 69
+    POT   shift, and go to state 70
+    SEMI  shift, and go to state 123
+
+
+State 115
+
+   27 stmt: ID exp SEMI .
+
+    $default  reduce using rule 27 (stmt)
+
+
+State 116
+
+   29 stmt: IF exp THEN . LCBRACE stmts RCBRACE SEMI
+   30     | IF exp THEN . LCBRACE stmts RCBRACE ELSE LCBRACE stmts RCBRACE SEMI
+
+    LCBRACE  shift, and go to state 124
+
+
+State 117
+
+   31 stmt: WHILE exp DO . LCBRACE stmts RCBRACE SEMI
+
+    LCBRACE  shift, and go to state 125
+
+
+State 118
+
+   32 stmt: RETURN exp SEMI .
+
+    $default  reduce using rule 32 (stmt)
+
+
+State 119
+
+   35 stmt: PRINT exp SEMI .
+
+    $default  reduce using rule 35 (stmt)
+
+
+State 120
+
+   36 stmt: INPUT exp SEMI .
+
+    $default  reduce using rule 36 (stmt)
+
+
+State 121
+
+    6 decl: ID LPAR RPAR DPOINT type LCBRACE stmts RCBRACE SEMI .
+
+    $default  reduce using rule 6 (decl)
+
+
+State 122
+
+    7 decl: ID LPAR argdefs RPAR DPOINT type LCBRACE stmts RCBRACE . SEMI
+
+    SEMI  shift, and go to state 126
+
+
+State 123
+
+   28 stmt: ID ASSIGN exp SEMI .
+
+    $default  reduce using rule 28 (stmt)
+
+
+State 124
+
+   29 stmt: IF exp THEN LCBRACE . stmts RCBRACE SEMI
+   30     | IF exp THEN LCBRACE . stmts RCBRACE ELSE LCBRACE stmts RCBRACE SEMI
+
+    ID      shift, and go to state 72
+    DEFINE  shift, and go to state 2
+    IF      shift, and go to state 73
+    WHILE   shift, and go to state 74
+    RETURN  shift, and go to state 75
+    BREAK   shift, and go to state 76
+    NEXT    shift, and go to state 77
+    PRINT   shift, and go to state 78
+    INPUT   shift, and go to state 79
+
+    decl   go to state 80
+    ids    go to state 6
+    stmts  go to state 127
+    stmt   go to state 82
+
+
+State 125
+
+   31 stmt: WHILE exp DO LCBRACE . stmts RCBRACE SEMI
+
+    ID      shift, and go to state 72
+    DEFINE  shift, and go to state 2
+    IF      shift, and go to state 73
+    WHILE   shift, and go to state 74
+    RETURN  shift, and go to state 75
+    BREAK   shift, and go to state 76
+    NEXT    shift, and go to state 77
+    PRINT   shift, and go to state 78
+    INPUT   shift, and go to state 79
+
+    decl   go to state 80
+    ids    go to state 6
+    stmts  go to state 128
+    stmt   go to state 82
+
+
+State 126
+
+    7 decl: ID LPAR argdefs RPAR DPOINT type LCBRACE stmts RCBRACE SEMI .
+
+    $default  reduce using rule 7 (decl)
+
+
+State 127
+
+   29 stmt: IF exp THEN LCBRACE stmts . RCBRACE SEMI
+   30     | IF exp THEN LCBRACE stmts . RCBRACE ELSE LCBRACE stmts RCBRACE SEMI
+
+    RCBRACE  shift, and go to state 129
+
+
+State 128
+
+   31 stmt: WHILE exp DO LCBRACE stmts . RCBRACE SEMI
+
+    RCBRACE  shift, and go to state 130
+
+
+State 129
+
+   29 stmt: IF exp THEN LCBRACE stmts RCBRACE . SEMI
+   30     | IF exp THEN LCBRACE stmts RCBRACE . ELSE LCBRACE stmts RCBRACE SEMI
+
+    SEMI  shift, and go to state 131
+    ELSE  shift, and go to state 132
+
+
+State 130
+
+   31 stmt: WHILE exp DO LCBRACE stmts RCBRACE . SEMI
+
+    SEMI  shift, and go to state 133
+
+
+State 131
+
+   29 stmt: IF exp THEN LCBRACE stmts RCBRACE SEMI .
+
+    $default  reduce using rule 29 (stmt)
+
+
+State 132
+
+   30 stmt: IF exp THEN LCBRACE stmts RCBRACE ELSE . LCBRACE stmts RCBRACE SEMI
+
+    LCBRACE  shift, and go to state 134
+
+
+State 133
+
+   31 stmt: WHILE exp DO LCBRACE stmts RCBRACE SEMI .
+
+    $default  reduce using rule 31 (stmt)
+
+
+State 134
+
+   30 stmt: IF exp THEN LCBRACE stmts RCBRACE ELSE LCBRACE . stmts RCBRACE SEMI
+
+    ID      shift, and go to state 72
+    DEFINE  shift, and go to state 2
+    IF      shift, and go to state 73
+    WHILE   shift, and go to state 74
+    RETURN  shift, and go to state 75
+    BREAK   shift, and go to state 76
+    NEXT    shift, and go to state 77
+    PRINT   shift, and go to state 78
+    INPUT   shift, and go to state 79
+
+    decl   go to state 80
+    ids    go to state 6
+    stmts  go to state 135
+    stmt   go to state 82
+
+
+State 135
+
+   30 stmt: IF exp THEN LCBRACE stmts RCBRACE ELSE LCBRACE stmts . RCBRACE SEMI
+
+    RCBRACE  shift, and go to state 136
+
+
+State 136
+
+   30 stmt: IF exp THEN LCBRACE stmts RCBRACE ELSE LCBRACE stmts RCBRACE . SEMI
+
+    SEMI  shift, and go to state 137
+
+
+State 137
+
+   30 stmt: IF exp THEN LCBRACE stmts RCBRACE ELSE LCBRACE stmts RCBRACE SEMI .
+
+    $default  reduce using rule 30 (stmt)

@@ -20,13 +20,13 @@ estado_terminal(e(jog(X), Tab)):-
 %
 % Utilidade:
 %       (+) -1: derrota
-%       (+)  1: vito'ria
+%       (+)  1: vitória
 %       (+)  0: empate (impossivel de acontecer)
 %
 utilidade(e(jog(x), Tab), +1):-
-    check_winner(x,Tab).
+    check_winner(x,Tab), !.
 utilidade(e(jog(o), Tab), -1):-
-    check_winner(o,Tab).
+    check_winner(o,Tab), !.
 utilidade(_, 0).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

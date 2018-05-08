@@ -33,7 +33,7 @@ jogada(E, A, B) :-
     jogada(S, B, A).
 
 decidir(humano, _, J) :-
-    nl, write("Humano: "),
+    nl, write("Humano: "),nl,
     read(J), nl.
 
 decidir(minimax, E, J) :-

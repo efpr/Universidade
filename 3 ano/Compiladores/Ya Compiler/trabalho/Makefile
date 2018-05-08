@@ -11,13 +11,13 @@ compile: parser.c lexer.c
 	$(CC) $(CFLAGS) $^ ya.c -o $(OUTFILE) $(LIBS)
 
 run-1:
-	./$(OUTFILE) < yaxamples/example1.ya
+	./$(OUTFILE) < ../yaxamples/example1.ya
 
 run-2:
-	./$(OUTFILE) < yaxamples/example2.ya
+	./$(OUTFILE) < ../yaxamples/example2.ya
 
 run-6:
-	./$(OUTFILE) < yaxamples/example6.ya
+	./$(OUTFILE) < ../yaxamples/example6.ya
 
 parser.c: ya.y
 		bison -y -v -d $^ -o $@

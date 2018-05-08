@@ -83,11 +83,11 @@ ids:		ID {$$ = T_ids_id(NULL, $1);}
 		| 	ID COMMA ids {$$ = T_ids_id($3, $1);}
 			;
 
-type:		INT {$$ = T_type_def(NULL,0,NULL);}
-		|	FLOAT {$$ = T_type_def(NULL,1,NULL);}
-		|	STRING {$$ = T_type_def(NULL,2,NULL);}
-		|	BOOL {$$ = T_type_def(NULL,3,NULL);}
-		|	VOID {$$ = T_type_def(NULL,4,NULL);}
+type:		INT {$$ = T_type_def(NULL,0,-1);}
+		|	FLOAT {$$ = T_type_def(NULL,1,-1);}
+		|	STRING {$$ = T_type_def(NULL,2,-1);}
+		|	BOOL {$$ = T_type_def(NULL,3,-1);}
+		|	VOID {$$ = T_type_def(NULL,4,-1);}
 		| 	type RRPAR LINT LRPAR {$$ = T_type_def($1,-1,$3);}
 			;
 

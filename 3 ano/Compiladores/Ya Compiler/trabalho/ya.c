@@ -480,3 +480,56 @@ t_exp T_exp_id(char* arg0, t_exp arg1)
     ret->u.exp_4.t_arg0 = arg1;
     return ret;
 }
+
+void print_decls (t_decls arg0)
+{
+  switch (arg0->kind) {
+    case DECLS_ONE_DECLARATION:
+      printf("[.descls \n");
+      print_decl(arg0->u.t_arg0);
+      printf("] \n");
+      break;
+    default:
+    printf("[.decls \n");
+    print_decl(arg0->u.t_arg0);
+    print_decls(arg0->u.t_arg1);
+    printf("] \n");
+    }
+}
+
+void print_decl(t_decl arg0)
+{
+  switch (arg0->kind) {
+    case DECL_ASSIGN_WITH_NO_VALUE:
+      printf("[.descl \n");
+      print_ids(arg0->u.assign.t_arg0);
+      print_type(arg0->u.assign.t_arg1);
+      printf("] \n");
+      break;
+    case DECL_ASSIGN_WITH_VALUE:
+      printf("[.descl \n");
+      print_ids(arg0->u.assign.t_arg0);
+      print_type(arg0->u.assign.t_arg1);
+      print_exp(arg0->u.assign.t_arg2);
+      printf("] \n");
+      break;
+    case DECL_FUNC_WITHOUT_ARGS:
+      printf("[.descl [.id $%s$ ] \n", arg0->function.id);
+      print_type(arg0->u.function.t_arg1);
+      print_stmt(arg0->u.function.t_arg2);
+      printf("] \n");
+      break;
+    case DECL_FUNC_WITH_ARGS:
+      printf("[.descl [.id $%s$ ] \n", arg0->function.id);
+      print_argdefs(arg0.u->function.t_arg0);
+      print_type(arg0->u.function.t_arg1);
+      print_stmt(arg0->u.function.t_arg2);
+      printf("] \n");
+      break;
+    default:
+    printf("[.decls \n");
+    print_decl(arg0->u.t_arg0);
+    print_decls(arg0->u.t_arg1);
+    printf("] \n");
+    }
+}

@@ -22,7 +22,7 @@ estado_terminal(e(_, Tab)):-
 %       (+)  0: empate (impossivel de acontecer)
 %
 utilidade(e(jog(ia), Tab), -1):-
-    check_tab(Tab).
+    check_tab(Tab), !.
 utilidade(e(jog(humano), Tab), +1):-
     check_tab(Tab).
 utilidade(_, 0).

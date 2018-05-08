@@ -6,6 +6,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+
+#include "ya.h"
+
 #include "parser.h"
 
 int line = 0;
