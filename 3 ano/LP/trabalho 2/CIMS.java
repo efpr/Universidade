@@ -6,9 +6,11 @@ public class CIMS {
   	private Memoria memoria;
     private ArrayList<Object> avaliacao;
     private ArrayList<Object> execucao;
+    private int pc; // program counter
 
     public CIMS()
     {
+        pc = 0;
         memoria = new Memoria();
         avaliacao = new ArrayList<Object>();
         execucao = new ArrayList<Object>();

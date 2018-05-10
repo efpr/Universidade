@@ -1,0 +1,5 @@
+# Comandos
+
+compilar: make
+limpar: make clean
+correr ficheiro: make run caminho/nome_do_ficheiro.cims

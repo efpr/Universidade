@@ -1,4 +1,8 @@
 
+import java.util.LinkedList;
+import java.util.Stack;
+
+
 public class Muda_linha extends I_Saida
 {
     public Muda_linha()
@@ -6,8 +10,9 @@ public class Muda_linha extends I_Saida
         super("muda_linha");
     }
     
-    public void accao()
+    public int accao(Memoria memoria, LinkedList<Bloco> list, Stack pilha, int pc, int b_corrente)
     {
-        
+        System.out.println();
+        return pc++;
     }
 }

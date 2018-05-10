@@ -5,9 +5,9 @@ public class Locais extends I_Chamada_Funcoes
     {
         super("locais", arg0, arg1);
     }
-    
+
     public void accao()
     {
-        
+        /* Não faz nada */
     }
 }

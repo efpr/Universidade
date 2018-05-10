@@ -40,4 +40,14 @@ public class Memoria
   			System.out.println(temp.toString());
   		}
     }
+
+    public ArrayList<Instrucao> getMem_instrucao() {
+        return mem_instrucao;
+    }
+
+    public ArrayList<Label> getMem_label() {
+        return mem_label;
+    }
+
+
 }

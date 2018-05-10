@@ -44,4 +44,8 @@ public class I_Acesso_Argumentos extends Instrucao
     public String toString() {
         return "I_Acesso_Argumentos{" + "nome=" + nome + ", inteiro1=" + inteiro1 + ", inteiro2=" + inteiro2 + '}';
     }
+    
+    
+    
+   
 }

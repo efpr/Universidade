@@ -3,15 +3,15 @@
 
 % barco(missionario(), canibais(), lado).
 
-inicio([margem(missionarios(3), canibais(2), esquerda),
+inicio([margem(missionarios(3), canibais(3), esquerda),
          barco(missionarios(0), canibais(0), esquerda),
          margem(missionarios(0), canibais(0), direita)]).
 
- % objetivo([margem(missionarios(3), canibais(3), direita)]).
+ objetivo([margem(missionarios(3), canibais(3), direita)]).
 
-objetivo([margem(missionarios(2), canibais(2), esquerda),
-         barco(missionarios(0), canibais(0), direita),
-         margem(missionarios(1), canibais(0), direita)]).
+% objetivo([margem(missionarios(2), canibais(2), esquerda),
+%          barco(missionarios(0), canibais(0), direita),
+%          margem(missionarios(1), canibais(0), direita)]).
 
 max_margem(0).
 max_margem(1).
@@ -87,10 +87,10 @@ acao(
     margem(missionarios(X1), canibais(Y1), Margem)]
     ):-
       max_barco(X), max_barco(Y), margem_actual(Margem),
-      X > 0,
       max_margem(X1), max_margem(Y1),
+      X > 0,
       X2 is X-1, X3 is X1+1,
-      X3 =< Y1.
+      Y1 =< X3.
 
 acao(
     desembarcar_canibais,
@@ -104,7 +104,7 @@ acao(
     margem(missionarios(X1), canibais(Y1), Margem)]
     ):-
       max_barco(X), max_barco(Y), margem_actual(Margem),
-      Y > 0,
       max_margem(X1), max_margem(Y1),
+      Y > 0,
       Y2 is Y-1, Y3 is Y1+1,
       Y3 =< X1.

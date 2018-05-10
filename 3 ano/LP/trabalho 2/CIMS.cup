@@ -49,7 +49,7 @@ etiqueta ::= IDENTIFICADOR:e DOIS_PONTOS
 	 ;
 instrucao ::= CHAMA INTEIRO:d IDENTIFICADOR:p
 				{: maquina.add_Inst(new Chama(
-											Integer.parseInt(d.toString()),
+											Integer.parseInt(d.toString()),2
 											p.toString())); :}
 	  |   LOCAIS INTEIRO:a INTEIRO:v
 	  			{: maquina.add_Inst(new Locais(
@@ -58,53 +58,53 @@ instrucao ::= CHAMA INTEIRO:d IDENTIFICADOR:p
 	  |   REGRESSA
 	  			{: maquina.add_Inst(new Regressa()); :}
 	  |   COLOCA_ARG INTEIRO:n
-	  			{: maquina.add_Inst(new Coloca_arg("Coloca",
+	  			{: maquina.add_Inst(new Coloca_arg(
 	  										Integer.parseInt(n.toString()))); :}
 	  |   EMPILHA_VAR INTEIRO:d INTEIRO:n
-	  			{: maquina.add_Inst(new I_Acesso_Variaveis("Empilha_Var",
+	  			{: maquina.add_Inst(new Empilha_var(
 	  										Integer.parseInt(d.toString()),
 	  										Integer.parseInt(n.toString()))); :}
 	  |   EMPILHA_ARG INTEIRO:d INTEIRO:n
-				{: maquina.add_Inst(new I_Acesso_Argumentos("Empilha_Arg",
+				{: maquina.add_Inst(new Empilha_arg(
 											Integer.parseInt(d.toString()),
 											Integer.parseInt(n.toString()))); :}
 	  |   EMPILHA INTEIRO:i
-	  			{: maquina.add_Inst(new I_Manipulacao_Inteiros("Empilha",
+	  			{: maquina.add_Inst(new Empilha(
 	  										Integer.parseInt(i.toString()))); :}
 	  |   ATRIBUI_VAR INTEIRO:d INTEIRO:n
-	  			{: maquina.add_Inst(new I_Acesso_Variaveis("Atribui_Var",
+	  			{: maquina.add_Inst(new Atribui_var(
 	  										Integer.parseInt(d.toString()),
 	  										Integer.parseInt(n.toString()))); :}
 	  |   ATRIBUI_ARG INTEIRO:d INTEIRO:n
-	  			{: maquina.add_Inst(new I_Acesso_Argumentos("Atribui_Arg",
+	  			{: maquina.add_Inst(new Atribui_arg(
 											Integer.parseInt(d.toString()),
 											Integer.parseInt(n.toString()))); :}
 	  |   SOMA
-	  			{: maquina.add_Inst(new I_Aritmetica("Soma")); :}
+	  			{: maquina.add_Inst(new Soma()); :}
 	  |   SUB
-	  			{: maquina.add_Inst(new I_Aritmetica("Sub")); :}
+	  			{: maquina.add_Inst(new Sub()); :}
 	  |   MULT
-	  			{: maquina.add_Inst(new I_Aritmetica("Mult")); :}
+	  			{: maquina.add_Inst(new Mult()); :}
 	  |   DIV
-	  			{: maquina.add_Inst(new I_Aritmetica("Div")); :}
+	  			{: maquina.add_Inst(new Div()); :}
 	  |   MOD
-	  			{: maquina.add_Inst(new I_Aritmetica("Mode")); :}
+	  			{: maquina.add_Inst(new Mod()); :}
 	  |   EXP
-	  			{: maquina.add_Inst(new I_Aritmetica("Exp")); :}
+	  			{: maquina.add_Inst(new Exp()); :}
 	  |   SIGUAL IDENTIFICADOR:e
-	  			{: maquina.add_Inst(new I_Salto("Sigual",
+	  			{: maquina.add_Inst(new Sigual(
 	  										e.toString())); :}
 	  |   SMENOR IDENTIFICADOR:e
-	  			{: maquina.add_Inst(new I_Salto("Smenor",
+	  			{: maquina.add_Inst(new Smenor(
 	  										e.toString())); :}
 	  |   SALTA IDENTIFICADOR:e
-	  			{: maquina.add_Inst(new I_Salto("Salta",
+	  			{: maquina.add_Inst(new Salta(
 	  										e.toString())); :}
 	  |   ESCREVE_INT
-	  			{: maquina.add_Inst(new I_Saida("EscreveInt")); :}
+	  			{: maquina.add_Inst(new Escreve_int()); :}
 	  |   ESCREVE_STR STRING:s
-	  			{: maquina.add_Inst(new I_Saida("Escreve",
+	  			{: maquina.add_Inst(new Escreve_str(
 	  										s.toString())); :}
 	  |   MUDA_LINHA
-	  			{: maquina.add_Inst(new I_Saida("MudaLinha")); :}
+	  			{: maquina.add_Inst(new Muda_linha()); :}
 	  ;

@@ -1,12 +1,12 @@
-main:	locals 0 0
-	empilha 12
+main:	locais 0 0
+	empilha 3
 	coloca_arg 1
 	chama -1 fact	# calcula fact(12)
 	escreve_int		# e imprime
 	muda_linha
 	regressa
 
-fact:	locals 1 2
+fact:	locais 1 2
 	empilha 1
 	atribui_var 0 2	# f = 1
 	empilha 1

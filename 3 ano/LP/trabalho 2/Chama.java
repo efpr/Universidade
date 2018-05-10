@@ -5,9 +5,15 @@ public class Chama extends I_Chamada_Funcoes
     {
         super("chama", arg0, arg1);
     }
-    
-    public void accao()
+
+    public int accao(int pc, Memoria memoria)
     {
-        
+        String etiqueta = getEtiqueta();
+
+        for(Label l : memoria.getMem_label())
+            if(l.getNome().equals(etiqueta))
+                pc = l.getTamanho();
+
+        return pc;
     }
 }
