@@ -49,7 +49,6 @@ public class CIMS {
 
         while(execucao.size() != 0)
         {
-          System.out.println(memoria.getMem_instrucao().get(pc));
             pc = memoria.getMem_instrucao().get(pc).accao(memoria, execucao, avaliacao, pc, b_corrente);
         }
   	}

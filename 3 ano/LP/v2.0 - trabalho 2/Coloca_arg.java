@@ -12,11 +12,24 @@ public class Coloca_arg extends I_Chamada_Funcoes
       @Override
     public int accao(Memoria memoria, LinkedList<Bloco> list, Stack pilha, int pc, int b_corrente)
     {
-        Bloco temp = new Bloco();
 
-        temp.insert(""+ getInteiro1(), (int) pilha.pop());
+        Bloco temp1 = list.get(b_corrente);
+        Bloco temp2 = list.getLast();
 
-        list.add(temp);
+        if(temp1.equals(temp2))
+        {
+          Bloco temp = new Bloco();
+
+          temp.insert(""+ getInteiro1(), (int) pilha.pop());
+
+          list.add(temp);
+        }
+        else
+        {
+          temp2.insert(""+ getInteiro1(), (int) pilha.pop());
+        }
+
+
 
         return ++pc;
 

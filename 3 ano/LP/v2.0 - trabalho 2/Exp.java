@@ -15,7 +15,7 @@ public class Exp extends I_Aritmetica
         int op2 = (int) pilha.pop();
         int op1 = (int) pilha.pop();
 
-        int pow = (int) Math.pow(op1, op1);
+        int pow = (int) Math.pow(op1, op2);
 
         pilha.push(pow);
 
