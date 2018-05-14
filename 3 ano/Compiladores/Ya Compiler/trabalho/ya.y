@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdio.h>
 
-#include "ya.h"
+#include "yatypes.h"
 
 int yylex (void);
 void yyerror (char const *);
@@ -65,7 +65,9 @@ void yyerror (char const *);
 %type <exp>			exp
 
 %%
-program:    decls
+program:    decls {	print_prologue();
+            				print_decls($1);
+                  	print_epilogue();}
             ;
 
 decls:		decl {$$ = T_decls_declaration($1, NULL);}
@@ -135,7 +137,7 @@ exp:		ID {$$ = T_exp_one_id($1);}
 		| 	exp MUL exp {$$ = T_exp_exp($1,$3,4);}
 		|	exp DIV exp {$$ = T_exp_exp($1,$3,5);}
 
-		|	MOD exp {$$ = T_exp_exp(NULL,$2,6);}
+		|	MOD exp {$$ = T_exp_exp(0,$2,6);}
 		|	exp POT exp {$$ = T_exp_exp($1,$3,7);}
 
 		| 	exp EQU exp {$$ = T_exp_exp($1,$3,8);}
@@ -149,10 +151,10 @@ exp:		ID {$$ = T_exp_one_id($1);}
 		|	exp AND exp {$$ = T_exp_exp($1,$3,14);}
 		|	exp	OR	exp {$$ = T_exp_exp($1,$3,15);}
 
-		|	NOT exp {$$ = T_exp_exp(NULL,$2,16);}
-		| 	SUB exp {$$ = T_exp_exp(NULL,$2,17);}
+		|	NOT exp {$$ = T_exp_exp(0,$2,16);}
+		| 	SUB exp {$$ = T_exp_exp(0,$2,17);}
 
-		| 	LPAR exp RPAR {$$ = T_exp_exp(NULL,$2,18);}
+		| 	LPAR exp RPAR {$$ = T_exp_exp(0,$2,18);}
 		| 	ID LPAR exp RPAR {$$ = T_exp_id($1,$3);}
 	//	|	exp DPOINT exp
 			;

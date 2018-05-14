@@ -3,9 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "ya.h"
+#include "yatypes.h"
 
-void print_decls (t_decls arg0);
 void print_decl(t_decl arg0);
 void print_ids (t_ids arg0);
 void print_type (t_type arg0);
@@ -492,6 +491,20 @@ t_exp T_exp_id(char* arg0, t_exp arg1)
     return ret;
 }
 
+void print_ids (t_ids arg0)
+{
+  switch (arg0->kind)
+  {
+    case ID_ONE:
+      printf("[.id $%s$ ] \n", arg0->u.id);
+      break;
+    default:
+    printf("[.ids [.id $%s$ ] \n", arg0->u.id);
+    print_ids(arg0->u.t_arg0);
+    printf("] \n");
+    }
+}
+
 void print_decls (t_decls arg0)
 {
   switch (arg0->kind) {
@@ -543,20 +556,8 @@ void print_decl(t_decl arg0)
     printf("] \n");
     }
 
-
-void print_ids (t_ids arg0)
-{
-  switch (arg0->kind)
-  {
-    case ID_ONE:
-      printf("[.id $%s$ ] \n", arg0->u.id);
-      break;
-    default:
-    printf("[.ids [.id $%s$ ] \n", arg0->u.id);
-    print_ids(arg0->u.t_arg0);
-    printf("] \n");
-    }
 }
+
 
 void print_type (t_type arg0)
 {
@@ -820,7 +821,4 @@ void print_exp (t_exp arg0)
       print_exp(arg0->u.exp_4.t_arg0);
       printf("] ] \n");
     }
-}
-
-
 }

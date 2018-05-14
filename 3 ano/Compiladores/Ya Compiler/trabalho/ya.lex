@@ -7,7 +7,7 @@
 #include <string.h>
 #include <stdio.h>
 
-#include "ya.h"
+#include "yatypes.h"
 
 #include "parser.h"
 
