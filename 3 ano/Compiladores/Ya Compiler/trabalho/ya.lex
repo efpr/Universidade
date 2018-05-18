@@ -7,6 +7,7 @@
 #include <string.h>
 #include <stdio.h>
 
+#include "latex.h"
 #include "yatypes.h"
 
 #include "parser.h"

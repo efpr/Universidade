@@ -4,6 +4,7 @@
 #include <stdio.h>
 
 #include "yatypes.h"
+#include "latex.h"
 
 int yylex (void);
 void yyerror (char const *);

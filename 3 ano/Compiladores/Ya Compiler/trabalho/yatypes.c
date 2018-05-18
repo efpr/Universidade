@@ -499,10 +499,10 @@ void print_ids (t_ids arg0)
       printf("[.id $%s$ ] \n", arg0->u.id);
       break;
     default:
-    printf("[.ids [.id $%s$ ] \n", arg0->u.id);
-    print_ids(arg0->u.t_arg0);
-    printf("] \n");
-    }
+      printf("[.ids [.id $%s$ ] \n", arg0->u.id);
+      print_ids(arg0->u.t_arg0);
+      printf("] \n");
+  }
 }
 
 void print_decls (t_decls arg0)

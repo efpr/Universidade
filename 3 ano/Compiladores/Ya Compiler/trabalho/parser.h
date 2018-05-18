@@ -150,7 +150,7 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 13 "ya.y" /* yacc.c:1909  */
+#line 14 "ya.y" /* yacc.c:1909  */
 
 	char *id;
 	int ival;

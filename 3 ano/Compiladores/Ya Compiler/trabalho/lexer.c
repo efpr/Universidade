@@ -558,7 +558,8 @@ char *yytext;
 #include <string.h>
 #include <stdio.h>
 
-#include "ya.h"
+#include "latex.h"
+#include "yatypes.h"
 
 #include "parser.h"
 
@@ -568,8 +569,8 @@ int column = 0;
 #define INC_RET(x, y) column += x; return(y)
 #define INC_COL(x) column += x
 #define INC_LINE() line++; column = 0
-#line 572 "lexer.c"
 #line 573 "lexer.c"
+#line 574 "lexer.c"
 
 #define INITIAL 0
 
@@ -786,9 +787,9 @@ YY_DECL
 		}
 
 	{
-#line 28 "ya.lex"
+#line 29 "ya.lex"
 
-#line 792 "lexer.c"
+#line 793 "lexer.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -857,272 +858,272 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 29 "ya.lex"
+#line 30 "ya.lex"
 { INC_RET(1, ADD); }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 30 "ya.lex"
+#line 31 "ya.lex"
 { INC_RET(1, SUB); }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 31 "ya.lex"
+#line 32 "ya.lex"
 { INC_RET(1, DIV); }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 32 "ya.lex"
+#line 33 "ya.lex"
 { INC_RET(1, MUL); }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 33 "ya.lex"
+#line 34 "ya.lex"
 { INC_RET(1, POT); }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 35 "ya.lex"
+#line 36 "ya.lex"
 { INC_RET(1, LPAR); }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 36 "ya.lex"
+#line 37 "ya.lex"
 { INC_RET(1, RPAR); }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 37 "ya.lex"
+#line 38 "ya.lex"
 { INC_RET(1, LRPAR); }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 38 "ya.lex"
+#line 39 "ya.lex"
 { INC_RET(1, RRPAR); }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 39 "ya.lex"
+#line 40 "ya.lex"
 { INC_RET(1, LCBRACE); }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 40 "ya.lex"
+#line 41 "ya.lex"
 { INC_RET(1, RCBRACE); }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 41 "ya.lex"
+#line 42 "ya.lex"
 { INC_RET(1, ASP); }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 42 "ya.lex"
+#line 43 "ya.lex"
 { INC_RET(1, SEMI); }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 43 "ya.lex"
+#line 44 "ya.lex"
 { INC_RET(1, DPOINT); }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 44 "ya.lex"
+#line 45 "ya.lex"
 { INC_RET(1, DOT); }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 45 "ya.lex"
+#line 46 "ya.lex"
 { INC_RET(1, COMMA); }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 47 "ya.lex"
+#line 48 "ya.lex"
 { INC_RET(2, EQU); }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 48 "ya.lex"
+#line 49 "ya.lex"
 { INC_RET(2, DIF); }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 50 "ya.lex"
+#line 51 "ya.lex"
 { INC_RET(1, ASSIGN); }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 51 "ya.lex"
+#line 52 "ya.lex"
 { INC_RET(2, LEQU); }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 52 "ya.lex"
+#line 53 "ya.lex"
 { INC_RET(2, BEQU); }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 53 "ya.lex"
+#line 54 "ya.lex"
 { INC_RET(1, LESS); }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 54 "ya.lex"
+#line 55 "ya.lex"
 { INC_RET(1, BIGG); }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 56 "ya.lex"
+#line 57 "ya.lex"
 { INC_RET(3, MOD); }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 57 "ya.lex"
+#line 58 "ya.lex"
 { INC_RET(3, AND); }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 58 "ya.lex"
+#line 59 "ya.lex"
 { INC_RET(2, OR); }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 59 "ya.lex"
+#line 60 "ya.lex"
 { INC_RET(3, NOT); }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 61 "ya.lex"
+#line 62 "ya.lex"
 { INC_RET(3, INT); }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 62 "ya.lex"
+#line 63 "ya.lex"
 { INC_RET(5, FLOAT); }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 63 "ya.lex"
+#line 64 "ya.lex"
 { INC_RET(6, STRING); }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 64 "ya.lex"
+#line 65 "ya.lex"
 { INC_RET(4, BOOL); }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 65 "ya.lex"
+#line 66 "ya.lex"
 { INC_RET(4, VOID); }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 67 "ya.lex"
+#line 68 "ya.lex"
 { INC_RET(6, DEFINE); }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 69 "ya.lex"
+#line 70 "ya.lex"
 { INC_RET(2, IF); }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 70 "ya.lex"
+#line 71 "ya.lex"
 { INC_RET(4, THEN); }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 71 "ya.lex"
+#line 72 "ya.lex"
 { INC_RET(4, ELSE); }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 73 "ya.lex"
+#line 74 "ya.lex"
 { INC_RET(5, WHILE); }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 74 "ya.lex"
+#line 75 "ya.lex"
 { INC_RET(2, DO); }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 76 "ya.lex"
+#line 77 "ya.lex"
 { INC_RET(6, RETURN); }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 77 "ya.lex"
+#line 78 "ya.lex"
 { INC_RET(5, BREAK); }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 78 "ya.lex"
+#line 79 "ya.lex"
 { INC_RET(4, NEXT); }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 80 "ya.lex"
+#line 81 "ya.lex"
 { INC_RET(5, PRINT); }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 81 "ya.lex"
+#line 82 "ya.lex"
 { INC_RET(5, INPUT); }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 83 "ya.lex"
+#line 84 "ya.lex"
 { yylval.ival = atof(yytext); INC_RET(strlen(yytext), LINT); }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 84 "ya.lex"
+#line 85 "ya.lex"
 { yylval.fval = atof(yytext); INC_RET(strlen(yytext), LFLOAT); }
 	YY_BREAK
 case 46:
 /* rule 46 can match eol */
 YY_RULE_SETUP
-#line 85 "ya.lex"
+#line 86 "ya.lex"
 { yylval.sval = strdup(yytext); INC_RET(strlen(yytext), LSTRING); }
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 86 "ya.lex"
+#line 87 "ya.lex"
 { yylval.bval = 1; INC_RET(4, LBOOL); }
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 87 "ya.lex"
+#line 88 "ya.lex"
 { yylval.bval = 0; INC_RET(5, LBOOL); }
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 89 "ya.lex"
+#line 90 "ya.lex"
 { yylval.id = strdup(yytext); INC_RET(strlen(yytext),ID); }
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 91 "ya.lex"
+#line 92 "ya.lex"
 { INC_COL(strlen(yytext)); }
 	YY_BREAK
 case 51:
 /* rule 51 can match eol */
 YY_RULE_SETUP
-#line 92 "ya.lex"
+#line 93 "ya.lex"
 { INC_LINE(); }
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 94 "ya.lex"
+#line 95 "ya.lex"
 { INC_COL(strlen(yytext)); }   /*Ignorar comentarios # ... # */
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 95 "ya.lex"
+#line 96 "ya.lex"
 ECHO;
 	YY_BREAK
-#line 1126 "lexer.c"
+#line 1127 "lexer.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2139,6 +2140,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 95 "ya.lex"
+#line 96 "ya.lex"
 
 
