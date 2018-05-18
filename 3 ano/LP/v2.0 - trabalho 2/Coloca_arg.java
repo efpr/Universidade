@@ -10,7 +10,7 @@ public class Coloca_arg extends I_Chamada_Funcoes
         super("coloca_arg", arg0);
     }
       @Override
-    public int accao(Memoria memoria, LinkedList<Bloco> list, Stack pilha, int pc, int b_corrente)
+    public int[] accao(Memoria memoria, LinkedList<Bloco> list, Stack pilha, int pc, int b_corrente)
     {
 
         Bloco temp1 = list.get(b_corrente);
@@ -31,7 +31,8 @@ public class Coloca_arg extends I_Chamada_Funcoes
 
 
 
-        return ++pc;
+        int[] a = {++pc, b_corrente};
+        return a;
 
 
     }

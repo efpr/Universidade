@@ -10,13 +10,14 @@ public class Regressa extends I_Chamada_Funcoes
         super("regressa");
     }
       @Override
-    public int accao(Memoria memoria, LinkedList<Bloco> list, Stack pilha, int pc, int b_corrente)
+    public int[] accao(Memoria memoria, LinkedList<Bloco> list, Stack pilha, int pc, int b_corrente)
     {
         pc = list.get(b_corrente).getValor_retorno();
 
         list.remove(b_corrente);
         b_corrente--;
 
-        return ++pc;
+        int[] a = {++pc, b_corrente};
+        return a;
     }
 }

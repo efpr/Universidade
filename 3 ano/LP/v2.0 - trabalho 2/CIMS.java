@@ -41,15 +41,18 @@ public class CIMS {
   	public void executa()
   	{
         Bloco bloco = new Bloco();
+        bloco.setValor_retorno(-2);
         execucao.add(bloco);
 
         int b_corrente = 0;
 
         pc = memoria.mem_get_label("main");
 
-        while(execucao.size() != 0)
+        while(pc != -1)
         {
-            pc = memoria.getMem_instrucao().get(pc).accao(memoria, execucao, avaliacao, pc, b_corrente);
+          int[] i = memoria.getMem_instrucao().get(pc).accao(memoria, execucao, avaliacao, pc, b_corrente);
+          pc = i[0];
+          b_corrente = i[1];
         }
   	}
 }

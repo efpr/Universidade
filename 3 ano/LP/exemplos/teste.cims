@@ -1,0 +1,17 @@
+ola:
+  locais 1 2
+  empilha_var 0 1
+  empilha 3
+  soma
+  muda_linha
+  escreve_str "Soma: "
+  escreve_int
+  muda_linha
+  regressa
+
+main:
+  locais 0 0
+  empilha 4
+  coloca_arg 1
+  chama -1 ola
+  regressa

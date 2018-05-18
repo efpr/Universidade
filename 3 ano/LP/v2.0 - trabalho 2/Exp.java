@@ -10,7 +10,7 @@ public class Exp extends I_Aritmetica
         super("exp");
     }
       @Override
-    public int accao(Memoria memoria, LinkedList<Bloco> list, Stack pilha, int pc, int b_corrente)
+    public int[] accao(Memoria memoria, LinkedList<Bloco> list, Stack pilha, int pc, int b_corrente)
     {
         int op2 = (int) pilha.pop();
         int op1 = (int) pilha.pop();
@@ -19,6 +19,7 @@ public class Exp extends I_Aritmetica
 
         pilha.push(pow);
 
-        return ++pc;
+        int[] a = {++pc, b_corrente};
+        return a;
     }
 }

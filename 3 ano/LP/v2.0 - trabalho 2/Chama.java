@@ -10,7 +10,7 @@ public class Chama extends I_Chamada_Funcoes
         super("chama", arg0, arg1);
     }
       @Override
-    public int accao(Memoria memoria, LinkedList<Bloco> list, Stack pilha, int pc, int b_corrente)
+    public int[] accao(Memoria memoria, LinkedList<Bloco> list, Stack pilha, int pc, int b_corrente)
     {
         Bloco temp1 = list.get(b_corrente);
         Bloco temp2 = list.getLast();
@@ -25,6 +25,7 @@ public class Chama extends I_Chamada_Funcoes
 
         list.getLast().setValor_retorno(pc);
 
-        return memoria.mem_get_label(getEtiqueta());
+        int[] a =  {memoria.mem_get_label(getEtiqueta()), b_corrente};
+        return a;
     }
 }

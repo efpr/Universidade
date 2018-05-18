@@ -11,12 +11,13 @@ public class Empilha_arg extends I_Acesso_Argumentos
     }
 
       @Override
-    public int accao(Memoria memoria, LinkedList<Bloco> list, Stack pilha, int pc, int b_corrente)
+    public int[] accao(Memoria memoria, LinkedList<Bloco> list, Stack pilha, int pc, int b_corrente)
     {
         Bloco temp = list.get(b_corrente-getInteiro1());
 
         pilha.push(temp.searchIndexV(getInteiro2()));
 
-        return ++pc;
+        int[] a = {++pc, b_corrente};
+        return a;
     }
 }

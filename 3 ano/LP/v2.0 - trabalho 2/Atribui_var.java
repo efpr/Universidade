@@ -10,10 +10,13 @@ public class Atribui_var extends I_Acesso_Variaveis
         super("atribui_var", arg0, arg1);
     }
       @Override
-    public int accao(Memoria memoria, LinkedList<Bloco> list, Stack pilha, int pc, int b_corrente)
+    public int[] accao(Memoria memoria, LinkedList<Bloco> list, Stack pilha, int pc, int b_corrente)
     {
-        list.get(b_corrente-getInteiro1()).changeValue(getInteiro2(), (int) pilha.pop());
+        int top = (int) pilha.pop();
+        pilha.push(top);
 
-        return ++pc;
+        list.get(b_corrente-getInteiro1()).changeValue(getInteiro2()-1, top);
+        int[] a = {++pc, b_corrente};
+        return a;
     }
 }

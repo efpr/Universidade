@@ -22,8 +22,8 @@ public class Bloco
         this.valor_retorno = valor_retorno;
     }
 
-    public String getValor_posicao() {
-        return table.toString();
+    public ArrayList<Pares> getValor_posicao() {
+        return table;
     }
 
     public void setValor_posicao(int valor_posicao) {

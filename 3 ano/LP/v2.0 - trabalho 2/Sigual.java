@@ -10,7 +10,7 @@ public class Sigual extends I_Salto
         super("sigual", arg0);
     }
       @Override
-    public int accao(Memoria memoria, LinkedList<Bloco> list, Stack pilha, int pc, int b_corrente)
+    public int[] accao(Memoria memoria, LinkedList<Bloco> list, Stack pilha, int pc, int b_corrente)
     {
         int op1 = (int) pilha.pop();
         int op2 = (int) pilha.pop();
@@ -25,11 +25,13 @@ public class Sigual extends I_Salto
 
             list.add(temp);*/
 
-            return memoria.mem_get_label(getEtiqueta());
+            int[] a = {memoria.mem_get_label(getEtiqueta()), b_corrente};
+            return a;
 
         }
 
-      return ++pc;
+        int[] a = {++pc, b_corrente};
+        return a;
 
     }
 }

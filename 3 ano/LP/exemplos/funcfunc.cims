@@ -1,4 +1,4 @@
-main:	locals 0 1
+main:	locais 0 1
 	empilha 100000
 	atribui_var 0 1		# abc = 100000
 	empilha_var 0 1

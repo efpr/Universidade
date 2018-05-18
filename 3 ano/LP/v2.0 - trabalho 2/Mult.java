@@ -10,13 +10,14 @@ public class Mult extends I_Aritmetica
         super("mult");
     }
       @Override
-    public int accao(Memoria memoria, LinkedList<Bloco> list, Stack pilha, int pc, int b_corrente)
+    public int[] accao(Memoria memoria, LinkedList<Bloco> list, Stack pilha, int pc, int b_corrente)
     {
         int op2 = (int) pilha.pop();
         int op1 = (int) pilha.pop();
 
         pilha.push(op1*op2);
 
-          return ++pc;
+        int[] a = {++pc, b_corrente};
+        return a;
     }
 }

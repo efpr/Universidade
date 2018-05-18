@@ -10,10 +10,10 @@ public class Escreve_int extends I_Saida
         super("escreve_int");
     }
       @Override
-    public int accao(Memoria memoria, LinkedList<Bloco> list, Stack pilha, int pc, int b_corrente)
+    public int[] accao(Memoria memoria, LinkedList<Bloco> list, Stack pilha, int pc, int b_corrente)
     {
         System.out.print(pilha.pop());
-
-        return ++pc;
+        int[] a = {++pc, b_corrente};
+        return a;
     }
 }
