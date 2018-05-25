@@ -9,9 +9,7 @@ inicio([margem(missionarios(3), canibais(3), esquerda),
 
  objetivo([margem(missionarios(3), canibais(3), direita)]).
 
-% objetivo([margem(missionarios(2), canibais(2), esquerda),
-%          barco(missionarios(0), canibais(0), direita),
-%          margem(missionarios(1), canibais(0), direita)]).
+
 
 max_margem(0).
 max_margem(1).
