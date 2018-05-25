@@ -1,0 +1,3 @@
+INSERT INTO Instituicao VALUES (0,-606,446,4,'www.SchlZACHERYPABLO.us/site','www.SchlZACHERYPABLO.us/precos',9974,'Ang. TERRENCE BEN')
+INSERT INTO Instituicao VALUES (0,456,-975,3,'www.SchlMARKBENNIE.us/site','www.SchlMARKBENNIE.us/precos',3041,'Ang. EDWARD QUINN')
+INSERT INTO Instituicao VALUES (0,164,874,2,'www.SchlDANASTANFORD.us/site','www.SchlDANASTANFORD.us/precos',20,'Ang. ALONZO ELROY')
