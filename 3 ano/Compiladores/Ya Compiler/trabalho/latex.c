@@ -3,6 +3,14 @@
 
 void print_prologue()
 {
+  FILE *fp;
+
+   printf("This will display on the screen.\n");
+
+   if((fp=freopen("apt.tex", "w" ,stdout))==NULL) {
+     printf("Cannot open file.\n");
+   }
+
   printf("\\documentclass{standalone}\n"
 	 "\\usepackage[utf8]{inputenc}\n"
 	 "\\usepackage[T1]{fontenc}\n"
@@ -10,6 +18,7 @@ void print_prologue()
 	 "\\usepackage[margin=1in]{geometry}\n"
 	 "\\usepackage{tikz-qtree}\n"
 	 "\\usetikzlibrary{shadows,trees}\n"
+   "\\newcommand{\\n}{\\textbackslash n}\n"
 	 "\\begin{document}\n"
 	 "\\tikzset{font=\\small,\n"
 	 "level distance=.8cm,\n"

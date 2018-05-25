@@ -310,7 +310,7 @@ t_ids T_ids_id(t_ids arg0, char* arg1)
 {
     t_ids ret = (t_ids) malloc(sizeof(*ret));
 
-    if(arg0 = NULL)
+    if(arg0 == NULL)
     {
         ret->kind = ID_ONE;
         ret->u.id = arg1;
@@ -496,10 +496,10 @@ void print_ids (t_ids arg0)
   switch (arg0->kind)
   {
     case ID_ONE:
-      printf("[.id $%s$ ] \n", arg0->u.id);
+      printf("[.id [ {%s} ] ] \n", arg0->u.id);
       break;
     default:
-      printf("[.ids [.id $%s$ ] \n", arg0->u.id);
+      printf("[.ids [.id [ {%s} ] ] \n", arg0->u.id);
       print_ids(arg0->u.t_arg0);
       printf("] \n");
   }
@@ -538,20 +538,20 @@ void print_decl(t_decl arg0)
       printf("] \n");
       break;
     case DECL_FUNC_WITHOUT_ARGS:
-      printf("[.descl [.id $%s$ ] \n", arg0->u.function.id);
+      printf("[.descl [.id [ {%s} ] ] \n", arg0->u.function.id);
       print_type(arg0->u.function.t_arg1);
       print_stmts(arg0->u.function.t_arg2);
       printf("] \n");
       break;
     case DECL_FUNC_WITH_ARGS:
-      printf("[.descl [.id $%s$ ] \n", arg0->u.function.id);
+      printf("[.descl [.id [ {%s} ] ] \n", arg0->u.function.id);
       print_argdefs(arg0->u.function.t_arg0);
       print_type(arg0->u.function.t_arg1);
       print_stmts(arg0->u.function.t_arg2);
       printf("] \n");
       break;
     default:
-    printf("[.descl [.id $%s$ ] \n", arg0->u.function.id);
+    printf("[.descl [.id [ {%s} ] ] \n", arg0->u.function.id);
     print_type(arg0->u.function.t_arg1);
     printf("] \n");
     }
@@ -564,24 +564,24 @@ void print_type (t_type arg0)
   switch (arg0->kind)
   {
     case TYPE_INT:
-      printf("[.type INTEGER ] \n");
+      printf("[.type [ {INTEGER} ] ] \n");
       break;
     case TYPE_FLOAT:
-      printf("[.type FLOAT ] \n");
+      printf("[.type [ {FLOAT} ] ] \n");
       break;
     case TYPE_STRING:
-      printf("[.type STRING ] \n");
+      printf("[.type [ {STRING} ] ] \n");
       break;
     case TYPE_BOOL:
-      printf("[.type BOOLEAN ] \n");
+      printf("[.type [ {BOOLEAN} ] ] \n");
       break;
     case TYPE_VOID:
-      printf("[.type VOID ] \n");
+      printf("[.type [ {VOID} ] ] \n");
       break;
     default:
       printf("[.type \n");
       print_type(arg0->u.t_arg0);
-      printf("[.size $%d$ ] ] \n", arg0->u.lint);
+      printf("[.size [ {%d} ] ] ] \n", arg0->u.lint);
     }
 }
 
@@ -604,7 +604,7 @@ void print_argdefs (t_argdefs arg0)
 
 void print_argdef (t_argdef arg0)
 {
-    printf("[.argdef [.id $%s$] \n", arg0->u.id);
+    printf("[.argdef [.id [ {%s} ] ] \n", arg0->u.id);
     print_type(arg0->u.t_arg0);
     printf("] \n");
 }
@@ -614,16 +614,16 @@ void print_literais (t_literais arg0)
   switch (arg0->kind)
   {
     case LITERAIS_INT:
-      printf("[.literais [.int $%d$] ]\n", arg0->u._int.t_arg0);
+      printf("[.literais [.int [ {%d} ] ] ]\n", arg0->u._int.t_arg0);
       break;
     case LITERAIS_FLOAT:
-      printf("[.literais [.float $%f$] ]\n", arg0->u._float.t_arg0);
+      printf("[.literais [.float [ {%f} ] ] ]\n", arg0->u._float.t_arg0);
       break;
     case LITERAIS_STRING:
-      printf("[.literais [.string $%s$] ]\n", arg0->u._string.t_arg0);
+      printf("[.literais [.string [ {%s} ] ] ]\n", arg0->u._string.t_arg0);
       break;
     default:
-      printf("[.literais [.bool $%d$] ]\n", arg0->u._int.t_arg0);
+      printf("[.literais [.bool [ {%d} ] ] ]\n", arg0->u._int.t_arg0);
     }
 }
 
@@ -654,12 +654,12 @@ void print_stmt (t_stmt arg0)
       printf("] \n");
       break;
     case STMT_FUNCTION:
-      printf("[.stmt [.function [.id $%s$ ] \n", arg0->u.stmt2.id);
+      printf("[.stmt [.function [.id [ {%s} ] ] \n", arg0->u.stmt2.id);
       print_exp(arg0->u.stmt2.t_arg0);
       printf("] ] \n");
       break;
     case STMT_ASSIGN:
-      printf("[.stmt [.assign [.id $%s$ ] \n", arg0->u.stmt2.id);
+      printf("[.stmt [.assign [.id [ {%s} ] ] \n", arg0->u.stmt2.id);
       print_exp(arg0->u.stmt2.t_arg0);
       printf("] ] \n");
       break;
@@ -670,7 +670,7 @@ void print_stmt (t_stmt arg0)
       printf("] ]\n");
       break;
     case STMT_IF_ELSE:
-      printf("[.stmt [.if_else \n");
+      printf("[.stmt [.{if else} \n");
       print_exp(arg0->u.stmt3.t_arg0);
       print_stmts(arg0->u.stmt3.t_arg1);
       print_stmts(arg0->u.stmt3.t_arg2);
@@ -711,7 +711,7 @@ void print_exp (t_exp arg0)
   switch (arg0->kind)
   {
     case EXP_ID:
-      printf("[.exp [.id $%s$ ] ] \n", arg0->u.exp_1.id);
+      printf("[.exp [.id [ {%s} ] ] ] \n", arg0->u.exp_1.id);
       break;
     case EXP_LITERAIS:
       printf("[.exp  \n");
@@ -719,105 +719,105 @@ void print_exp (t_exp arg0)
       printf("] \n");
       break;
     case EXP_ADD:
-      printf("[.exp [.add + ] \n" );
+      printf("[.exp [.add [ {+} ] ] \n" );
       print_exp(arg0->u.exp_3.t_arg0);
       print_exp(arg0->u.exp_3.t_arg1);
       printf("] \n");
       break;
     case EXP_SUB:
-      printf("[.exp [.sub - ] \n" );
+      printf("[.exp [.sub [ {-} ] ] \n" );
       print_exp(arg0->u.exp_3.t_arg0);
       print_exp(arg0->u.exp_3.t_arg1);
       printf("] \n");
       break;
     case EXP_MULT:
-      printf("[.exp [.mult * ] \n" );
+      printf("[.exp [.mult [ {*} ] ] \n" );
       print_exp(arg0->u.exp_3.t_arg0);
       print_exp(arg0->u.exp_3.t_arg1);
       printf("] \n");
       break;
     case EXP_DIV:
-      printf("[.exp [.div / ] \n" );
+      printf("[.exp [.div [ {/} ] ] \n" );
       print_exp(arg0->u.exp_3.t_arg0);
       print_exp(arg0->u.exp_3.t_arg1);
       printf("] \n");
       break;
     case EXP_MOD:
-      printf("[.exp [.mod %% ] \n" );
+      printf("[.exp [.mod [ {%%} ] ] \n" );
       print_exp(arg0->u.exp_3.t_arg1);
       printf("] \n");
       break;
     case EXP_POT:
-      printf("[.exp [.pot ^ ] \n" );
+      printf("[.exp [.pot [ {^} ] ] \n" );
       print_exp(arg0->u.exp_3.t_arg0);
       print_exp(arg0->u.exp_3.t_arg1);
       printf("] \n");
       break;
     case EXP_EQUAL:
-      printf("[.exp [.equal == ] \n" );
+      printf("[.exp [.equal [ {==} ] ] \n" );
       print_exp(arg0->u.exp_3.t_arg0);
       print_exp(arg0->u.exp_3.t_arg1);
       printf("] \n");
       break;
     case EXP_DIFFETENT:
-      printf("[.exp [.diff != ] \n" );
+      printf("[.exp [.diff [ {!=} ] ] \n" );
       print_exp(arg0->u.exp_3.t_arg0);
       print_exp(arg0->u.exp_3.t_arg1);
       printf("] \n");
       break;
     case EXP_LESS:
-      printf("[.exp [.less < ] \n" );
+      printf("[.exp [.less [ {<} ] ] \n" );
       print_exp(arg0->u.exp_3.t_arg0);
       print_exp(arg0->u.exp_3.t_arg1);
       printf("] \n");
       break;
     case EXP_BIGGER:
-      printf("[.exp [.bigger > ] \n" );
+      printf("[.exp [.bigger [ {>} ] ] \n" );
       print_exp(arg0->u.exp_3.t_arg0);
       print_exp(arg0->u.exp_3.t_arg1);
       printf("] \n");
       break;
     case EXP_LESS_OR_EQUAL:
-      printf("[.exp [.less_or_equal <= ] \n" );
+      printf("[.exp [.{less or equal} [ {<=} ] ] \n" );
       print_exp(arg0->u.exp_3.t_arg0);
       print_exp(arg0->u.exp_3.t_arg1);
       printf("] \n");
       break;
     case EXP_BIGGER_OR_EQUAL:
-      printf("[.exp [.bigger_or_equal >= ] \n" );
+      printf("[.exp [.{bigger or equal} [ {>=} ] ] \n" );
       print_exp(arg0->u.exp_3.t_arg0);
       print_exp(arg0->u.exp_3.t_arg1);
       printf("] \n");
       break;
     case EXP_AND:
-      printf("[.exp [.and && ] \n" );
+      printf("[.exp [.and [ {&&} ] ] \n" );
       print_exp(arg0->u.exp_3.t_arg0);
       print_exp(arg0->u.exp_3.t_arg1);
       printf("] \n");
       break;
     case EXP_OR:
-      printf("[.exp [.or || ] \n" );
+      printf("[.exp [.or [ {||} ] ] \n" );
       print_exp(arg0->u.exp_3.t_arg0);
       print_exp(arg0->u.exp_3.t_arg1);
       printf("] \n");
       break;
     case EXP_NOT:
-      printf("[.exp [.not ! ] \n" );
+      printf("[.exp [.not [ {!} ] ] \n" );
       print_exp(arg0->u.exp_3.t_arg1);
       printf("] \n");
       break;
     case EXP_NEGATION:
-      printf("[.exp [.negation - ] \n" );
+      printf("[.exp [.negation [ {-} ] ] \n" );
       print_exp(arg0->u.exp_3.t_arg1);
       printf("] \n");
       break;
     case EXP_PARENTESES:
-      printf("[.exp [.parenteses () ] \n" );
+      printf("[.exp [.parenteses [ {()} ] ] \n" );
       print_exp(arg0->u.exp_3.t_arg1);
       printf("] \n");
       break;
     default:
-      printf("[.exp [.function [.id $%s$ ]\n", arg0->u.exp_4.id);
+      printf("[.exp [.function [.id [ {%s} ] ]\n", arg0->u.exp_4.id);
       print_exp(arg0->u.exp_4.t_arg0);
       printf("] ] \n");
     }

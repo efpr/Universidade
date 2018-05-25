@@ -1,0 +1,104 @@
+\documentclass{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{tikz-qtree}
+\usetikzlibrary{shadows,trees}
+\newcommand{\n}{\textbackslash n}
+\begin{document}
+\tikzset{font=\small,
+level distance=.8cm,
+every node/.style=
+    {color=white,
+    rectangle,rounded corners,
+    align=center,
+    text = black
+    },
+edge from parent/.style=
+    {draw=blue,
+    thick
+    }}
+
+\centering
+\begin{tikzpicture}
+\Tree [.decls 
+[.descl [.id [ {factrec} ] ] 
+[.argdefs 
+[.argdef [.id [ {n} ] ] 
+[.type [ {INTEGER} ] ] 
+] 
+] 
+[.type [ {INTEGER} ] ] 
+[.stmts 
+[.stmt 
+[.descl 
+[.ids [.id [ {a} ] ] 
+[.id [ {b} ] ] 
+] 
+[.type [ {INTEGER} ] ] 
+] 
+] 
+[.stmts 
+[.stmt [.{if else} 
+[.exp [.equal [ {==} ] ] 
+[.exp [.id [ {n} ] ] ] 
+[.exp  
+[.literais [.int [ {1} ] ] ]
+] 
+] 
+[.stmts 
+[.stmt [.assign [.id [ {b} ] ] 
+[.exp  
+[.literais [.int [ {1} ] ] ]
+] 
+] ] 
+] 
+[.stmts 
+[.stmt [.assign [.id [ {a} ] ] 
+[.exp [.sub [ {-} ] ] 
+[.exp [.id [ {n} ] ] ] 
+[.exp  
+[.literais [.int [ {1} ] ] ]
+] 
+] 
+] ] 
+[.stmts 
+[.stmt [.assign [.id [ {b} ] ] 
+[.exp [.mult [ {*} ] ] 
+[.exp [.id [ {n} ] ] ] 
+[.exp [.function [.id [ {factrec} ] ]
+[.exp [.id [ {a} ] ] ] 
+] ] 
+] 
+] ] 
+] 
+] 
+] ]
+[.stmts 
+[.stmt [.return 
+[.exp [.id [ {b} ] ] ] 
+] ]
+] 
+] 
+] 
+] 
+[.descls 
+[.descl [.id [ {main} ] ] 
+[.type [ {VOID} ] ] 
+[.stmts 
+[.stmt [.print 
+[.exp [.parenteses [ {()} ] ] 
+[.exp [.function [.id [ {factrec} ] ]
+[.exp  
+[.literais [.int [ {3} ] ] ]
+] 
+] ] 
+] 
+] ]
+] 
+] 
+] 
+] 
+\end{tikzpicture}
+\end{document}

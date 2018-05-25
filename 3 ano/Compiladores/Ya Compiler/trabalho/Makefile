@@ -4,7 +4,7 @@ OUTFILE = out
 LIBS =-lm
 
 
-all: clean compile run-2
+all: clean compile run-6 apt pdf
 
 compile: parser.c lexer.c yatypes.o latex.o
 	$(CC) $(CFLAGS) parser.c lexer.c yatypes.o latex.o -o $(OUTFILE) $(LIBS)
@@ -30,6 +30,12 @@ parser.c: ya.y
 lexer.c: ya.lex
 		flex -o $@ $^
 
-clean:
-		rm -rf parser.c lexer.c parser.h parser.output
-		rm -f out
+apt:
+	pdflatex apt.tex
+
+clean: pdf
+		rm -rf parser.c lexer.c parser.h parser.output latex.o yatypes.o
+		rm -f out apt.pdf
+
+pdf:
+	rm -f apt.aux apt.log apt.tex
