@@ -35,7 +35,7 @@ esc(L, Y):-
     sort(Lista,LP),
     fprint(LP,1),
     fsep(Y),
-    Y1 is Y + 1, 
+    Y1 is Y + 1,
     esc(L,Y1).
 %%
 fsep(X):-
