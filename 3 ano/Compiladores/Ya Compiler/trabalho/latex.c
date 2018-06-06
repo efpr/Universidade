@@ -18,7 +18,7 @@ void print_prologue()
 	 "\\usepackage[margin=1in]{geometry}\n"
 	 "\\usepackage{tikz-qtree}\n"
 	 "\\usetikzlibrary{shadows,trees}\n"
-   "\\newcommand{\\n}{\\textbackslash n}\n"
+     "\\newcommand{\\n}{\\textbackslash n}\n"
 	 "\\begin{document}\n"
 	 "\\tikzset{font=\\small,\n"
 	 "level distance=.8cm,\n"
