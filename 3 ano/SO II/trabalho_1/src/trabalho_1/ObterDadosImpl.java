@@ -149,7 +149,7 @@ public class ObterDadosImpl extends UnicastRemoteObject implements ObterDados, j
         return autor;
     }
     
-    public int comprarArtigo(int codigo_artigo, int n) throws Exception
+    public synchronized int comprarArtigo(int codigo_artigo, int n) throws Exception
     {
         // executar uma compra de n artigos
         Artigo artigo = dadosArtigo(codigo_artigo);
