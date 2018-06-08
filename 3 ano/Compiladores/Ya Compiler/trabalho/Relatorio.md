@@ -1,4 +1,4 @@
-### Relatorio Compilador YA!
+# Relatorio Compilador YA!
 ## Analise Lexical
 
 A primeira fase da implementação de um compilador para a linguagem YA! consiste na criação do analisador lexical. Esta fase tem como objetivo ler o codigo fonte e detectar as palavras reservadas da linguaguem. Estas palavras são entre outras "if", "then", "else", "int", etc. Estes simbolos não vão poder ser usados como por exemplo ID numa declaração.
