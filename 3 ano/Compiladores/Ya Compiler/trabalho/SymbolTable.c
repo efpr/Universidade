@@ -5,7 +5,7 @@
 
 #define SIZE 269
 
-enum
+typedef enum
 {
     INT,
     FLOAT,
@@ -17,78 +17,89 @@ enum
 }t_type;
 
 typedef struct node node;
+typedef struct hashtable hashtable;
 
 struct node
 {
     char *id;
     t_type type;
     int empty;
-    node *table;
+    hashtable *next;
 };
 
-char *scope = -1;
-node hastable[SIZE];
-////////
-int search(node hastable, char *id)
+struct hashtable
 {
-    int asci = 0;
-    while(*id != '\0')
-    {
-        asci += id;
-        *id++;
-    }
+    int scope;
+    node table[SIZE];
+};
+
+
+////////
+
+hashtable *create_hash()
+{
+    hashtable *hash =  malloc(sizeof(hashtable));
+    hash->scope = -1;
+
+    return hash;
+}
+
+int search(hashtable *hash, char *id)
+{
+    int asci = atoi(id);
     int pos = asci % SIZE;
-    while(hashtable[pos].empty != 1)
+    while(hash->table[pos].empty != 1)
     {
         pos ++;
     }
 
     return pos;
 }
-
-void insert_variable(node table, char *arg0, t_type arg1)
+void change_scope(hashtable *hash, int arg0)
 {
-    int pos = search(arg0);
-
-    table[pos].id = arg0;
-    table[pos].type = arg1;
-    table[pos].empty = 1;
+    hash->scope = arg0;
 }
-void insert_fuction(node table, char *arg0, t_types arg1/*, ARFUMENTOS */)
+void insert_variable(hashtable *hash, char *arg0, t_type arg1)
 {
-    int pos = search(arg0);
+    int pos = search(hash,arg0);
 
-    table[pos].id = arg0;
-    table[pos].type = arg1;
-    table[pos].empty = 1;
-
-    node new_hash[SIZE] = (node) malloc(sizeof(node)*SIZE);
-    table[pos].table = new_hash;
-
-    scope = id;
+    hash->table[pos].id = arg0;
+    hash->table[pos].type = arg1;
+    hash->table[pos].empty = 1;
 }
-t_type lookup(char *id)
+void insert_fuction(hashtable *hash, char *arg0, t_type arg1/*, ARFUMENTOS */)
 {
-    if(scope != -1)
+    int pos = search(hash,arg0);
+
+    hash->table[pos].id = arg0;
+    hash->table[pos].type = arg1;
+    hash->table[pos].empty = 1;
+
+    hashtable *new_hash = malloc(sizeof(hashtable));
+    hash->table[pos].next = new_hash;
+
+    hash->scope = pos;
+}
+t_type lookup(hashtable *hash, char *id)
+{
+    if(hash->scope != -1)
     {
-        int pos = search(hastable,scope)
+        int pos_scope = search(hash->table[hash->scope].next, id);
 
-        int pos_scope = search(hastable[pos].table, id);
-
-        while(hastable[pos].table[pos_scope].empty==1)
+        while(hash->table[hash->scope].next->table[pos_scope].empty==1)
         {
-            if(strcmp(hastable[pos].table[pos_scope].id, id)==0)
-                return hastable[pos].table[pos_scope].table.type;
+            if(strcmp(hash->table[hash->scope].next->table[pos_scope].id, id)==0)
+                return hash->table[hash->scope].next->table[pos_scope].type;
             pos_scope++;
         }
     }
-    int pos = search(hastable,id)
+    int pos = search(hash,id);
 
-    while(hastable[pos].empty==1)
+    while(hash->table[pos].empty==1)
     {
-        if(strcmp(hastable[pos].table[pos_scope].id, id)==0)
-            return hastable[pos].table[pos_scope].table.type;
+        if(strcmp(hash->table[pos].id, id)==0)
+            return hash->table[pos].type;
         pos++;
     }
-    return null;
+    return -1;
 }
