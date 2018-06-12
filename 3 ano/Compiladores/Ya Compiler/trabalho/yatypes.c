@@ -4,6 +4,7 @@
 #include <string.h>
 
 #include "yatypes.h"
+#include "SymbolTable.h"
 
 void print_decl(t_decl arg0);
 void print_ids (t_ids arg0);
@@ -822,3 +823,69 @@ void print_exp (t_exp arg0)
       printf("] ] \n");
     }
 }
+
+/////////////////////////////////////////////////////////
+/*
+void table_first_decls(t_decls arg0)
+{
+    hashtable *hash = create_hash();
+    switch (arg0->kind) {
+        case DECLS_ONE_DECLARATION:
+            table_decl(hash, arg0->u.t_arg0);
+            break;
+        default:
+            table_decl(hash, arg0->u.t_arg0);
+            table_decls(hash, arg0->u.t_arg1);
+    }
+
+}
+void table_decls(hashtable *hash, t_decls arg0)
+{
+    switch (arg0->kind) {
+        case DECLS_ONE_DECLARATION:
+            table_decl(hash, arg0->u.t_arg0);
+            break;
+        default:
+            table_decl(hash, arg0->u.t_arg0);
+            table_decls(hash, arg0->u.t_arg1);
+    }
+}
+void table_decl(hashtable *hash, t_decl arg0)
+{
+    switch (arg0->kind) {
+        case DECL_ASSIGN_WITH_NO_VALUE:
+            int type = arg0->u.assign.t_arg1.kind;
+            table_ids_insert(hash,arg0->u.assign.t_arg0, type);
+        case DECL_ASSIGN_WITH_VALUE:
+            int type = arg0->u.assign.t_arg1.kind;
+            table_ids_insert(hash,arg0->u.assign.t_arg0, type);
+        default:
+            ///
+    }
+}
+
+void table_ids_insert(hashtable *hash, t_ids arg0, int type)
+{
+        switch (type) {
+            case TYPE_INT:
+                insert_variable(hash, arg0->u.id, table_INT);
+                break;
+            case TYPE_FLOAT:
+                insert_variable(hash, arg0->u.id, table_FLOAT);
+                break;
+            case TYPE_BOOL:
+                insert_variable(hash, arg0->u.id, table_BOOLEAN);
+                break;
+            case TYPE_VOID:
+                insert_variable(hash, arg0->u.id, table_VOID);
+                break;
+            default:
+                insert_variable(hash, arg0->u.id, table_ARRAY);
+        }
+
+        if(arg0.kind == ID_ONE)
+        {
+            table_ids_insert(hash, arg0->t_arg0, type);
+        }
+}
+*/

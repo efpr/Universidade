@@ -5,24 +5,12 @@
 
 #define SIZE 269
 
-typedef enum
-{
-    INT,
-    FLOAT,
-    STRING,
-    BOOLEAN,
-    VOID,
-    ARRAY/*,
-    FUCTION*/
-}t_type;
-
-typedef struct node node;
-typedef struct hashtable hashtable;
+#include "SymbolTable.h"
 
 struct node
 {
     char *id;
-    t_type type;
+    table_type type;
     int empty;
     hashtable *next;
 };
@@ -59,7 +47,7 @@ void change_scope(hashtable *hash, int arg0)
 {
     hash->scope = arg0;
 }
-void insert_variable(hashtable *hash, char *arg0, t_type arg1)
+void insert_variable(hashtable *hash, char *arg0, table_type arg1)
 {
     int pos = search(hash,arg0);
 
@@ -67,7 +55,7 @@ void insert_variable(hashtable *hash, char *arg0, t_type arg1)
     hash->table[pos].type = arg1;
     hash->table[pos].empty = 1;
 }
-void insert_fuction(hashtable *hash, char *arg0, t_type arg1/*, ARFUMENTOS */)
+void insert_fuction(hashtable *hash, char *arg0, table_type arg1/*, ARFUMENTOS */)
 {
     int pos = search(hash,arg0);
 
@@ -80,7 +68,7 @@ void insert_fuction(hashtable *hash, char *arg0, t_type arg1/*, ARFUMENTOS */)
 
     hash->scope = pos;
 }
-t_type lookup(hashtable *hash, char *id)
+table_type lookup(hashtable *hash, char *id)
 {
     if(hash->scope != -1)
     {
